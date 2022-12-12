@@ -5,7 +5,7 @@ import { notify } from './helpers';
 
 /** Assume the api key is stored in safe place in the real world */
 const key = "55d07fcf";
-const apiUrlBase = `http://www.omdbapi.com/?apikey=${key}`;
+const apiUrlBase = `https://www.omdbapi.com/?apikey=${key}`;
 
 /**
  * Get all movies by the search keyword
