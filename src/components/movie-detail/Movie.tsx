@@ -29,7 +29,7 @@ import { useGetMovie } from '../../assets/apiFetcher';
 import type { MovieType } from '../../assets/types';
 
 /**
- * Renders dashboard page with all todos
+ * Renders homepage with search bar
  */
 const Movie: React.FC = () => {
   const theme = useTheme();

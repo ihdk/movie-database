@@ -18,29 +18,37 @@ import type { RootStore } from '../../store/store';
 const SearchBar: React.FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // local storaga data
   const searchTerm = useSelector<RootStore, string>((state) => state.local.searchTerm);
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  /**
+   * Cancel search
+   */
+  const resetSearch = () => {
+    dispatch(setSearchTerm(""))
+    dispatch(updateLoadedPage(0))
+    dispatch(setTotalMovies(0))
+    dispatch(resetLoadedMovies())
+    dispatch(setActiveQuery(false))
+  }
 
   /**
    * Process the search
    */
   const handleSearch = () => {
     if (searchInputRef.current !== null) {
-      dispatch(setSearchTerm(searchInputRef.current.value.trim()))
       if (searchInputRef.current.value !== "") {
         // process new search, activate query and define first page of results
-        dispatch(setActiveQuery(true))
+        dispatch(setSearchTerm(searchInputRef.current.value.trim()))
         dispatch(updateLoadedPage(1))
+        dispatch(setActiveQuery(true))
       } else {
         // reset search if keyword is empty
         searchInputRef.current.focus();
-        dispatch(setActiveQuery(false))
-        dispatch(updateLoadedPage(0))
-        dispatch(setTotalMovies(0))
-        dispatch(resetLoadedMovies())
+        resetSearch();
       }
     }
   }
@@ -81,6 +89,7 @@ const SearchBar: React.FC = () => {
           background: theme.palette.background.fancy,
           color: theme.palette.primary.main
         }}>Find movie</Button>
+        <Button variant="text" size="large" onClick={resetSearch}>Cancel</Button>
       </Stack>
     </Paper>
   );

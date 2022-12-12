@@ -26,10 +26,10 @@ export const useFindMoviesQuery = (searchTerm: string, loadedPage: number | stri
       if (response.data.Response === 'False') {
         // success query, but not found results in database
         notify(response.data.Error);
-        dispatch(setActiveQuery(false))
         dispatch(updateLoadedPage(0))
         dispatch(setTotalMovies(0))
         dispatch(resetLoadedMovies())
+        dispatch(setActiveQuery(false))
       }
       return response.data;
     }
@@ -49,7 +49,7 @@ export const useFindMoviesQuery = (searchTerm: string, loadedPage: number | stri
 }
 
 /**
- * Get all todos for dashboard page
+ * Get movie by its ID
  * @returns react query
  */
 export const useGetMovie = (movieId: string) => {

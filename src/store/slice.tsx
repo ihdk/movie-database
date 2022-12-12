@@ -3,7 +3,7 @@ import { processFetchedMovie } from '../assets/helpers';
 
 import type { MovieType } from '../assets/types';
 
-/** Initial global states and defined reducers */
+// Locally stored states
 const localSlice = createSlice({
   name: 'local_app_states',
   initialState: {
@@ -15,7 +15,6 @@ const localSlice = createSlice({
     scrollPosition: 0,
   },
   reducers: {
-    /** Store search keyword typed by user */
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
@@ -37,7 +36,6 @@ const localSlice = createSlice({
         return item.id !== action.payload;
       })
     },
-
     updateLoadedPage: (state, action: PayloadAction<number>) => {
       state.loadedPage = action.payload;
     },
@@ -50,13 +48,13 @@ const localSlice = createSlice({
   }
 });
 
+// App states
 const appSlice = createSlice({
   name: 'app_states',
   initialState: {
     activeQuery: false,
   },
   reducers: {
-    /** Store search keyword typed by user */
     setActiveQuery: (state, action: PayloadAction<boolean>) => {
       state.activeQuery = action.payload;
     },
