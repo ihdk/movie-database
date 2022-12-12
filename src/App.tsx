@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ToastContainer } from 'react-toastify';
 
@@ -12,11 +12,13 @@ import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import Box from '@mui/material/Box';
 import { alpha } from '@mui/material/';
 
-import MovieSearch from './components/movie-search/MovieSearch';
-import Movie from './components/movie-detail/Movie';
-import Favourites from './components/favourites/Favourites';
 import { persistor, store } from './store/store';
-import NothingFound from './components/404/NothingFound';
+import FullscreenLoader from './components/FullscreenLoader';
+
+const MovieSearch = lazy(() => import('./components/movie-search/MovieSearch'));
+const Movie = lazy(() => import('./components/movie-detail/Movie'));
+const Favourites = lazy(() => import('./components/favourites/Favourites'));
+const NothingFound = lazy(() => import('./components/404/NothingFound'));
 
 
 // allow custom colors in MUI palette
@@ -91,7 +93,7 @@ const App: React.FC = () => {
     },
     {
       path: "*",
-      element: <NothingFound/>
+      element: <NothingFound />
     },
   ]);
 
@@ -102,13 +104,15 @@ const App: React.FC = () => {
           <QueryClientProvider client={queryClient}>
             <CssBaseline />
             <Box component="main">
-              <RouterProvider router={router} />
+              <Suspense fallback={<FullscreenLoader />}>
+                <RouterProvider router={router} />
+              </Suspense>
             </Box>
             <ToastContainer autoClose={2000} theme="colored" />
           </QueryClientProvider>
         </PersistGate>
-      </Provider>
-    </ThemeProvider>
+      </Provider >
+    </ThemeProvider >
   );
 }
 
