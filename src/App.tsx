@@ -16,7 +16,7 @@ import { persistor, store } from './store/store';
 import FullscreenLoader from './components/FullscreenLoader';
 
 const MovieSearch = lazy(() => import('./components/movie-search/MovieSearch'));
-const Movie = lazy(() => import('./components/movie-detail/Movie'));
+const Movie = lazy(() => import('./components/movie-detail/MovieDetail'));
 const Favourites = lazy(() => import('./components/favourites/Favourites'));
 const NothingFound = lazy(() => import('./components/404/NothingFound'));
 

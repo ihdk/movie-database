@@ -60,7 +60,7 @@ const Movie: React.FC = () => {
         <>
           {movie.image && <CoverImage imageUrl={movie.image} />}
           <Container maxWidth="xl" >
-            <Stack direction={{ sm: "column", md: "row" }} spacing={3}>
+            <Stack direction={{ sm: "column", md: "row" }} spacing={3} sx={{ mb: theme.spacing(4) }}>
               <Image movie={movie} />
               <Box sx={{ width: "100%", pt: theme.spacing(1) }}>
                 <Title movie={movie} />
