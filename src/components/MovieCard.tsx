@@ -10,7 +10,6 @@ import CardMedia from '@mui/material/CardMedia';
 
 import FavouriteButton from './FavouriteButton';
 import MissingImagePlaceholder from './MissingImagePlaceholder';
-import { __pl } from '../assets/helpers';
 import { useIsFavouriteMovie } from '../assets/helpers'
 
 import type { MovieType } from '../assets/types';

@@ -43,6 +43,7 @@ const Movie: React.FC = () => {
     if (query.isSuccess && query.data.Response === "True") {
       setMovie(processFetchedMovie(query.data));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.data])
 
   return (

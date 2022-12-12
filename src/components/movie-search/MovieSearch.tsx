@@ -26,6 +26,7 @@ const MovieSearch: React.FC = () => {
     }
     window.addEventListener('beforeunload', setPosition)
     if (scrollPosition) window.scroll(0, scrollPosition);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

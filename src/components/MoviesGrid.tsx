@@ -1,11 +1,9 @@
-import React, { } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 
 import useTheme from '@mui/material/styles/useTheme';
 import Grid from '@mui/material/Grid';
 
 import MovieCard from './MovieCard';
-import { __pl } from '../assets/helpers';
 
 import type { MovieType } from '../assets/types';
 

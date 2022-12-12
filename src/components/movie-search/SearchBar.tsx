@@ -49,6 +49,7 @@ const SearchBar: React.FC = () => {
         dispatch(resetLoadedMovies())
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.data])
 
   /**

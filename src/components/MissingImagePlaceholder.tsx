@@ -5,8 +5,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TheatersIcon from '@mui/icons-material/Theaters';
 
-import { __pl } from '../assets/helpers';
-
 import type { MovieType } from '../assets/types';
 
 /**

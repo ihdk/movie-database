@@ -42,7 +42,7 @@ export const processFetchedMovie: (data: any) => MovieType = (data) => {
     writer: data.Writer && isAvailable(data.Writer) ? data.Writer : "",
     director: data.Director && isAvailable(data.Director) ? data.Director : "",
     year: data.Director && isAvailable(data.Year) ? data.Year : "",
-    
+
   }
 }
 
@@ -53,7 +53,7 @@ const isAvailable = (value: string) => {
 export const useIsFavouriteMovie = (movieId: string) => {
   const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
   let isFavourite = false;
-  favouriteMovies.map((item) => {
+  favouriteMovies.forEach(item => {
     if (item.id === movieId) isFavourite = true;
   })
   return isFavourite;
