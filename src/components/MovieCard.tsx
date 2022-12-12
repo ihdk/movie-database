@@ -22,7 +22,7 @@ const MovieCard: React.FC<{ movie: MovieType }> = ({ movie }) => {
   const isFavourite = useIsFavouriteMovie(movie.id);
 
   return (
-    <Grid item width={{ xs: "50%", md: "20%" }}>{/* used percentage css instead of grid system to show 5 items per row*/}
+    <Grid item width={{ xs: "50%", sm: "25%", md: "20%" }}>{/* used percentage css instead of grid system to show 5 items per row*/}
       <Box sx={{
         position: "relative",
         height: "100%",

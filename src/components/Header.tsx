@@ -23,11 +23,16 @@ const Header: React.FC = () => {
       p: theme.spacing(3),
       mb: theme.spacing(5),
     }}>
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={3} sx={{ justifyContent: "space-between" }}>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={3} sx={{
+        justifyContent: "space-between",
+        [theme.breakpoints.down('sm')]: {
+          alignItems: "center"
+        }
+      }}>
         <Logo />
-        <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
-          {favouriteMovies.length > 0 && <Button href="/favourites"  size="large" >My movies ({favouriteMovies.length})</Button>}
-          <Button href="/" variant="outlined" size="large"><HomeIcon/></Button>
+        <Stack direction="row" spacing={1}>
+          {favouriteMovies.length > 0 && <Button href="/favourites" size="large" >My movies ({favouriteMovies.length})</Button>}
+          <Button href="/" variant="outlined" size="large"><HomeIcon /></Button>
         </Stack>
       </Stack>
     </Container>

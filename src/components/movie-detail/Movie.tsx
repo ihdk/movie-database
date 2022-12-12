@@ -65,9 +65,9 @@ const Movie: React.FC = () => {
         <>
           {movie.image && <CoverImage imageUrl={movie.image} />}
           <Container maxWidth="xl" >
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={3}>
+            <Stack direction={{ sm: "column", md: "row" }} spacing={3}>
               {movie.image && <Box>
-                <Card sx={{ borderRadius: 4, width: 300, m: theme.spacing(0, "auto") }}>
+                <Card sx={{ borderRadius: 4, width: 300, maxWidth:"100%", m: theme.spacing(0, "auto") }}>
                   <CardMedia
                     component="img"
                     image={movie.image}
@@ -86,17 +86,23 @@ const Movie: React.FC = () => {
                   <PeopleIcon fontSize="small" />
                   <Typography variant="body2">{movie.actors}</Typography>
                 </Stack>
+
+                <Divider sx={{ m: theme.spacing(2, 0) }} />
+
                 <Stack
                   direction={{ xs: "row", sm: "row" }}
                   spacing={2}
                   divider={<Divider orientation="vertical" flexItem />}
                   sx={{
-                    m: theme.spacing(2, 0),
-                    p: theme.spacing(2, 0),
-                    borderTop: 1,
-                    borderBottom: 1,
-                    borderWidth: 1,
-                    borderColor: theme.palette.divider
+                    alignItems: "center",
+                    [theme.breakpoints.down('sm')]: {
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                      '& > *': {
+                        pt: theme.spacing(1),
+                        pb: theme.spacing(1)
+                      }
+                    }
                   }}
                 >
                   {movie.genre &&
@@ -110,18 +116,20 @@ const Movie: React.FC = () => {
                     <Chip label={movie.language} size="small" />
                   }
                   {movie.runtime &&
-                    <>
-                      <AccessTimeIcon />
-                      <Typography >{movie.runtime}</Typography>
-                    </>
+                    <Box sx={{ display: "flex" }}>
+                      <AccessTimeIcon fontSize="small" sx={{ mr: theme.spacing(1) }} />
+                      <Typography variant="body2" >{movie.runtime}</Typography>
+                    </Box>
                   }
                   {movie.year &&
-                    <>
-                      <CalendarMonthIcon />
-                      <Typography >{movie.year}</Typography>
-                    </>
+                    <Box sx={{ display: "flex" }}>
+                      <CalendarMonthIcon fontSize="small" sx={{ mr: theme.spacing(1) }} />
+                      <Typography variant="body2" >{movie.year}</Typography>
+                    </Box>
                   }
                 </Stack>
+
+                <Divider sx={{ m: theme.spacing(2, 0) }} />
 
                 {movie.plot &&
                   <Box sx={{ mb: theme.spacing(4) }}>
