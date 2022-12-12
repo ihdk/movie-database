@@ -1,0 +1,6 @@
+{
+  "short_name": "Movie Database",
+  "name": "Movie database example project",
+  "start_url": ".",
+  "display": "standalone"
+}
