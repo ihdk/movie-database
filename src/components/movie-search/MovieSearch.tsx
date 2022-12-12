@@ -32,7 +32,7 @@ const MovieSearch: React.FC = () => {
   return (
     <>
       <CoverImage imageUrl={bg} />
-      <Header />
+      <Header hideHome />
       <Container maxWidth="xl">
         <SearchBar />
         <SearchResults />

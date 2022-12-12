@@ -47,7 +47,7 @@ const MovieCard: React.FC<{ movie: MovieType }> = ({ movie }) => {
                 <CardMedia
                   component="img"
                   height="400"
-                  image={movie.image !== "" ? movie.image : require('../assets/images/missing_image.png')}
+                  image={movie.image}
                   alt={movie.title}
                 />
               )

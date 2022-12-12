@@ -14,10 +14,10 @@ import type { MovieType } from '../assets/types';
 /**
  * Renders main header
  */
-const Header: React.FC = () => {
+const Header: React.FC<{ hideHome?: Boolean }> = ({ hideHome = false }) => {
   const theme = useTheme();
   const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
-
+  console.log(hideHome);
   return (
     <Container maxWidth={false} sx={{
       p: theme.spacing(3),
@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         <Logo />
         <Stack direction="row" spacing={1}>
           {favouriteMovies.length > 0 && <Button href="/favourites" size="large" >My movies ({favouriteMovies.length})</Button>}
-          <Button href="/" variant="outlined" size="large"><HomeIcon /></Button>
+          {!hideHome && <Button href="/" variant="outlined" size="large"><HomeIcon /></Button>}
         </Stack>
       </Stack>
     </Container>
