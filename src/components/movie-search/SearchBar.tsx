@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import useTheme from '@mui/material/styles/useTheme';
@@ -9,9 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Paper from '@mui/material/Paper';
 import { InputAdornment } from '@mui/material';
 
-import { updateLoadedPage, setSearchTerm, updateLoadedMovies, resetLoadedMovies, setTotalMovies, setActiveQuery } from '../../store/slice'
-import { useFindMoviesQuery } from '../../assets/apiFetcher';
-import { notify } from '../../assets/helpers';
+import { updateLoadedPage, setSearchTerm, resetLoadedMovies, setTotalMovies, setActiveQuery } from '../../store/slice'
 import type { RootStore } from '../../store/store';
 
 /**
@@ -21,36 +19,10 @@ const SearchBar: React.FC = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  /** Keep query in idle state while we don't need query to fetch data */
-  const activeQuery = useSelector<RootStore, boolean>((state) => state.app.activeQuery);
-
   // local storaga data
   const searchTerm = useSelector<RootStore, string>((state) => state.local.searchTerm);
-  const loadedPage = useSelector<RootStore, number>((state) => state.local.loadedPage);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
-
-  const query = useFindMoviesQuery(searchTerm, loadedPage, activeQuery);
-
-  useEffect(() => {
-    if (query.isSuccess) {
-      if (query.data.Response === "True") {
-        // success query, returned found movies
-        dispatch(updateLoadedMovies({ data: query.data.Search, reset: loadedPage === 1 }))
-        dispatch(setTotalMovies(query.data.totalResults))
-      }
-
-      if (query.data.Response === 'False') {
-        // success query, but not found results in database
-        notify(query.data.Error);
-        dispatch(setActiveQuery(false))
-        dispatch(updateLoadedPage(0))
-        dispatch(setTotalMovies(0))
-        dispatch(resetLoadedMovies())
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query.data])
 
   /**
    * Process the search

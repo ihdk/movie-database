@@ -11,7 +11,6 @@ const localSlice = createSlice({
     loadedMovies: [] as MovieType[],
     favouriteMovies: [] as MovieType[],
     loadedPage: 0,
-    willPaginate: false,
     totalMovies: 0,
     scrollPosition: 0,
   },
@@ -26,27 +25,21 @@ const localSlice = createSlice({
       });
       state.loadedMovies = action.payload.reset ? newMovies : [...current(state.loadedMovies), ...newMovies];
     },
+    resetLoadedMovies: (state) => {
+      state.loadedMovies = [];
+    },
     addFavouriteMovie: (state, action: PayloadAction<any>) => {
       const movie = action.payload;
-      let isFavourite = false;
-      state.favouriteMovies.forEach(item => {
-        if (item.id === movie.id) isFavourite = true
-      })
-      if (!isFavourite) state.favouriteMovies.push(movie);
+      if (state.favouriteMovies.filter(item => item.id === movie.id).length === 0) state.favouriteMovies.push(movie);
     },
     removeFavouriteMovie: (state, action: PayloadAction<string>) => {
       state.favouriteMovies = state.favouriteMovies.filter((item) => {
         return item.id !== action.payload;
       })
     },
-    resetLoadedMovies: (state) => {
-      state.loadedMovies = [];
-    },
+
     updateLoadedPage: (state, action: PayloadAction<number>) => {
       state.loadedPage = action.payload;
-    },
-    setWillPaginateReducer: (state, action: PayloadAction<string>) => {
-      state.searchTerm = action.payload;
     },
     setTotalMovies: (state, action: PayloadAction<string | number>) => {
       state.totalMovies = typeof action.payload === "string" ? parseInt(action.payload) : action.payload;
@@ -55,7 +48,7 @@ const localSlice = createSlice({
       state.scrollPosition = action.payload;
     },
   }
-})
+});
 
 const appSlice = createSlice({
   name: 'app_states',

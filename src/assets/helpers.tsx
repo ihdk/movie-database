@@ -52,10 +52,6 @@ const isAvailable = (value: string) => {
 
 export const useIsFavouriteMovie = (movieId: string) => {
   const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
-  let isFavourite = false;
-  favouriteMovies.forEach(item => {
-    if (item.id === movieId) isFavourite = true;
-  })
-  return isFavourite;
+  return favouriteMovies.filter(item => item.id === movieId).length > 0;
 }
 
