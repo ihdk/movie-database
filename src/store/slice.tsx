@@ -29,10 +29,9 @@ const localSlice = createSlice({
     addFavouriteMovie: (state, action: PayloadAction<any>) => {
       const movie = action.payload;
       let isFavourite = false;
-      state.favouriteMovies.map((item) => {
+      state.favouriteMovies.forEach(item => {
         if (item.id === movie.id) isFavourite = true
-      });
-
+      })
       if (!isFavourite) state.favouriteMovies.push(movie);
     },
     removeFavouriteMovie: (state, action: PayloadAction<string>) => {
