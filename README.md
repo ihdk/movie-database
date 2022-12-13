@@ -46,7 +46,7 @@ Application cosists from four routes splitted into separated chunks:
 
 Movie search is the main page of application. Allows you to process search query and display found movies in the grid.
 Data are fetched from database using [Axios](https://www.npmjs.com/package/react-axios) and [ReactQuery](https://www.npmjs.com/package/react-query) maintain fetched and cached query results.
-Found results are stored locally in browser using [React Persist](https://www.npmjs.com/package/redux-persist) to maintain results even the user leave application or browse through application routes.
+Found results are stored locally in browser using [React Persist](https://www.npmjs.com/package/redux-persist) to maintain results and scroll position even the user leave application or browse through application routes.
 
 Movies are loaded from database in groups of 10 movies (limitation of OMDb API) with ability to load more movies using button under the grid with movies.
 
