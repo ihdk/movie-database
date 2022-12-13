@@ -15,9 +15,16 @@ const MissingImagePlaceholder: React.FC<{ movie?: MovieType }> = ({ movie }) => 
   return (
     <Box sx={{
       height: "100%",
+      minHeight: 400,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      [theme.breakpoints.down('md')]: {
+        minHeight: 350,
+      },
+      [theme.breakpoints.down('sm')]: {
+        minHeight: 330,
+      },
     }}>
       {movie && <Typography align="center" color="secondary" variant="h6" sx={{ p: theme.spacing(2, 1) }}>{movie.title}</Typography>}
       <Box sx={{

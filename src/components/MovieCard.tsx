@@ -40,15 +40,22 @@ const MovieCard: React.FC<{ movie: MovieType }> = ({ movie }) => {
         <Link href={`/movie/${movie.id}`} underline="none">
           <Card sx={{
             position: "relative",
-            height: "100%",
           }}>
             {movie.image !== ""
               ? (
                 <CardMedia
                   component="img"
-                  height="400"
+                  height={400}
                   image={movie.image}
                   alt={movie.title}
+                  sx={{
+                    [theme.breakpoints.down('md')]: {
+                      maxHeight: 350,
+                    },
+                    [theme.breakpoints.down('sm')]: {
+                      maxHeight: 330,
+                    },
+                  }}
                 />
               )
               : (
