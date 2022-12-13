@@ -9,12 +9,10 @@ describe('Movie Search', () => {
   it('Check elements', () => {
     cy.get('header h1').should('contain.text', appNameText)
 
-    cy.get('.search-bar').should('exist').should('be.visible')
-
     cy.get('.search-bar').within(() => {
-      cy.get('.search-input').should('exist').should('be.visible').should('be.empty')
-      cy.get('.search-button').should('exist').should('be.visible').should('have.text', 'Find movie')
-      cy.get('.cancel-button').should('exist').should('be.visible').should('have.text', 'Cancel')
+      cy.get('.search-input').should('be.empty')
+      cy.get('.search-button').should('have.text', 'Find movie')
+      cy.get('.cancel-button').should('have.text', 'Cancel')
 
       cy.get('.search-button').click()
       cy.get('.search-input').should('have.focus')
@@ -45,13 +43,13 @@ describe('Movie Search', () => {
       const total = 95;
       const step = 10;
 
-      cy.get('.load-more-button').should('exist').as('loadMoreButton')
 
       // check number of results
       cy.get('h2').should('contain.text', `Found ${total} movies`)
       cy.get('.search-results-header').should('contain.text', `Showing ${step} of ${total}`)
-      cy.get('.MuiGrid-root.MuiGrid-container').should('exist').as('gridContainer')
 
+      cy.get('.load-more-button').as('loadMoreButton')
+      cy.get('.MuiGrid-root.MuiGrid-container').as('gridContainer')
       cy.get('@gridContainer').find('.MuiGrid-item').should('have.length', step)
 
       // test load more movies
@@ -59,8 +57,6 @@ describe('Movie Search', () => {
         cy.get('h2').should('contain.text', `Found ${total} movies`)
         cy.get('.search-results-header').should('contain.text', `Showing ${step * clicks} of ${total}`)
         cy.get('@gridContainer').find('.MuiGrid-item').should('have.length', step * clicks)
-
-
 
         cy.get('@loadMoreButton').click().wait(1000)
         cy.get('@loadMoreButton').should('contain.text', `Load next ${step} movies`)
@@ -70,28 +66,31 @@ describe('Movie Search', () => {
   })
 
 
-  it('Movies links', () => {
+  it('Movies data', () => {
     cy.get('.MuiGrid-root.MuiGrid-container').find('.movie-item').each(($movieItem) => {
-      cy.wrap($movieItem).find('a').should('have.attr', 'href', `/movie/${$movieItem.data('movie-id')}`)
+      cy.wrap($movieItem).as('movieItem')
+      cy.get('@movieItem').within(() => {
+        cy.get('a').should('have.attr', 'href', `/movie/${$movieItem.data('movie-id')}`)
+        cy.get('.favourite-button-wrapper').should('exist')
+      })
     })
   })
 
 
   it('Add to favourites', () => {
-    cy.get('.MuiGrid-root.MuiGrid-container').find('.MuiGrid-item').first().find('.movie-item').as('firstItem');
+    cy.get('.MuiGrid-root.MuiGrid-container').find('.movie-item').first().as('firstItem');
+    cy.get('@firstItem').find('.favourite-button-wrapper').find('button').as('favouriteButton')
 
     cy.get('@firstItem').should('not.have.class', 'is-favourite')
-    cy.get('@firstItem').find('.favourite-button-wrapper').should('exist').find('button').as('favouriteButton')
-    cy.get('.favourites-menu-button').should('not.exist')
-    cy.get('@favouriteButton').click({ force: true })
-    
-    cy.get('@firstItem').should('have.class', 'is-favourite')
+    cy.get('header').find('.favourites-menu-button').should('not.exist')
 
+    cy.get('@favouriteButton').click({ force: true })
+
+    cy.get('@firstItem').should('have.class', 'is-favourite')
   })
 
-  it('Favourites header menu button', () => {
+  it('Visible favourites header menu button', () => {
     cy.get('.favourites-menu-button')
-      .should('exist')
       .should('contain.text', 'My movies (1)')
       .should('have.attr', 'href', '/favourites')
   })
@@ -99,9 +98,9 @@ describe('Movie Search', () => {
 
   it('Remove from favourites', () => {
     // try ty add into favourites
-    cy.get('.MuiGrid-root.MuiGrid-container').find('.MuiGrid-item').first().find('.movie-item').as('firstItem');
+    cy.get('.MuiGrid-root.MuiGrid-container').find('.movie-item').first().as('firstItem');
+    cy.get('@firstItem').find('.favourite-button-wrapper button').as('favouriteButton')
 
-    cy.get('@firstItem').find('.favourite-button-wrapper').find('button').as('favouriteButton')
     cy.get('@favouriteButton').click({ force: true })
 
     // is not favourite
@@ -113,14 +112,8 @@ describe('Movie Search', () => {
 
   it('Process search cancel', () => {
     cy.get('.search-bar').within(() => {
-
-      cy.get('.search-input')
-        .should('have.value', 'Terminator')
-
       cy.get('.cancel-button').click()
-
       cy.get('.search-input').should('have.value', '')
-
     })
     cy.get('.search-results').should('not.exist')
   })
@@ -142,4 +135,4 @@ describe('Movie Search', () => {
 
 
 
-export {}
+export { }
