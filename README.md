@@ -52,12 +52,12 @@ Movies are loaded from database in groups of 10 movies (limitation of OMDb API) 
 
 Every movie can be added to own favourite list by clicking on the star icon displayed with movie.
 
-Main component: `MovieSearch` in `./components/movie-search/MovieSearch`
+Main component: `MovieSearch` in `./src/components/movie-search/MovieSearch`
 
 Consists from components to render:
-- header `./components/Header`
-- search bar `./components/movie-search/SearchBar`
-- search results `./components/movie-search/SearchResults`.
+- header `./src/components/Header`
+- search bar `./src/components/movie-search/SearchBar`
+- search results `./src/components/movie-search/SearchResults`.
 
 ### Movie Detail
 
@@ -65,11 +65,11 @@ Displays detail information of movie fetched from database.
 
 Movie can be added into favourite list by clicking on the star icon displayed beside movie title.
 
-Main component: `MovieDetail` in `./components/movie-detail/MovieDetail`
+Main component: `MovieDetail` in `./src/components/movie-detail/MovieDetail`
 
 Consists from components to render:
-- header `./components/Header`
-- other additional components with appropriate movie information in the same folder `./components/movie-detail`
+- header `./src/components/Header`
+- other additional components with appropriate movie information in the same folder `./src/components/movie-detail`
 
 ### Favourites 
 
@@ -77,20 +77,20 @@ Page displays selected favourite movies the same way as they are displayed in Mo
 
 List of favourite movies is stored locally in browser using [React Persist](https://www.npmjs.com/package/redux-persist).
 
-Main component: `Favourites` in `./components/favourites/Favourites`
+Main component: `Favourites` in `./src/components/favourites/Favourites`
 
 
 ### 404 Nothing found
 
 Standard 404 page for non-existent routes.
 
-Main component: `NothingFound` in `./components/nothing-found/NothingFound`
+Main component: `NothingFound` in `./src/components/nothing-found/NothingFound`
 
 ## Files structure
 
 Root folder of application include main index file and core `App` component.
 
 Other folders:
-- `./assets` - additional files with small help functions, images and hooks that fetch data from database,
-- `./components` - React components divided to sub-folders by routes, components in the root of this folder are additional components that may be shared between main routes components
-- `./store` - files for React Redux store and appropriate reducers
+- `./src/assets` - additional files with small help functions, images and hooks that fetch data from database,
+- `./src/components` - React components divided to sub-folders by routes, components in the root of this folder are additional components that may be shared between main routes components
+- `./src/store` - files for React Redux store and appropriate reducers
