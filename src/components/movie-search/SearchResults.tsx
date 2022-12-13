@@ -45,7 +45,7 @@ const SearchResults: React.FC = () => {
 
     return (
       <Box sx={{ p: theme.spacing(4, 0), textAlign: "center" }}>
-        <LoadingButton loading={query.isLoading} variant="contained" size="large" onClick={handleLoadMore} sx={{
+        <LoadingButton className="load-more-button" loading={query.isLoading} variant="contained" size="large" onClick={handleLoadMore} sx={{
           whiteSpace: "nowrap",
           background: theme.palette.background.fancy,
           color: theme.palette.primary.main,
@@ -63,9 +63,11 @@ const SearchResults: React.FC = () => {
       {(query.isLoading && loadedMovies.length === 0) && <Box textAlign="center"><CircularProgress /></Box>}
 
       {loadedMovies.length > 0 &&
-        <Box>
-          <Typography component="h2" variant="h5">Found {total} {__pl(["movie", "movies"], total)} </Typography>
-          <Typography sx={{ mb: theme.spacing(2) }}>Showing {loadedMovies.length} of {total}</Typography>
+        <Box className="search-results">
+          <Box className="search-results-header">
+            <Typography component="h2" variant="h5">Found {total} {__pl(["movie", "movies"], total)} </Typography>
+            <Typography sx={{ mb: theme.spacing(2) }}>Showing {loadedMovies.length} of {total}</Typography>
+          </Box>
           <MoviesGrid movies={loadedMovies} />
           <LoadMore />
         </Box>

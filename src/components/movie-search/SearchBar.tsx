@@ -53,6 +53,16 @@ const SearchBar: React.FC = () => {
     }
   }
 
+  /**
+   * Cancel search
+   */
+  const handleCancel = () => {
+    if (searchInputRef.current !== null) {
+      searchInputRef.current.value = "";
+    }
+    resetSearch();
+  }
+
   const SearchInput = () => {
     const [term, setSearchTerm] = useState(searchTerm);
     return <TextField
@@ -81,15 +91,15 @@ const SearchBar: React.FC = () => {
   }
 
   return (
-    <Paper elevation={0} sx={{ borderRadius: 4, p: theme.spacing(8, 4), mb: theme.spacing(6) }}>
-      <Stack direction={{ xs: "column", md: "row" }} spacing={1} sx={{ pb: theme.spacing(2) }} >
+    <Paper className="search-bar" elevation={0} sx={{ borderRadius: 4, p: theme.spacing(8, 4), mb: theme.spacing(6) }}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={1} >
         <SearchInput />
-        <Button variant="contained" size="large" onClick={handleSearch} sx={{
+        <Button className="search-button" variant="contained" size="large" onClick={handleSearch} sx={{
           whiteSpace: "nowrap",
           background: theme.palette.background.fancy,
           color: theme.palette.primary.main
         }}>Find movie</Button>
-        <Button variant="text" size="large" onClick={resetSearch}>Cancel</Button>
+        <Button className="cancel-button" variant="text" size="large" onClick={handleCancel}>Cancel</Button>
       </Stack>
     </Paper>
   );
