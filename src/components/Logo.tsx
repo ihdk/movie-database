@@ -11,9 +11,9 @@ import Typography from '@mui/material/Typography';
 const Logo: React.FC = () => {
   const theme = useTheme();
   return (
-    <Box>
+    <Box className="logo">
       <Link href="/" underline="none" color="inherit" >
-        <Typography component="h1" variant="h4" sx={{
+        <Typography component="div" variant="h4" sx={{
           whiteSpace: 'nowrap', lineHeight: 1.5,
           background: theme.palette.background.fancy,
           WebkitBackgroundClip: "text",

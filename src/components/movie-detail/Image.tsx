@@ -17,7 +17,7 @@ const Image: React.FC<{ movie: MovieType }> = ({ movie }) => {
   return (
     <>
       {movie.image &&
-        <Box sx={{ mb: theme.spacing(4) }}>
+        <Box className="movie-image" sx={{ mb: theme.spacing(4) }}>
           <Card sx={{ borderRadius: 4, width: 300, maxWidth: "100%", m: theme.spacing(0, "auto") }}>
             <CardMedia
               component="img"

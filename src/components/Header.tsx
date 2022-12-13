@@ -32,7 +32,7 @@ const Header: React.FC<{ hideHome?: Boolean }> = ({ hideHome = false }) => {
         <Logo />
         <Stack direction="row" spacing={1}>
           {favouriteMovies.length > 0 && <Button className="favourites-menu-button" href="/favourites" size="large" >My movies ({favouriteMovies.length})</Button>}
-          {!hideHome && <Button href="/" variant="outlined" size="large"><HomeIcon /></Button>}
+          {!hideHome && <Button className="home-menu-button" href="/" variant="outlined" size="large"><HomeIcon /></Button>}
         </Stack>
       </Stack>
     </Container>

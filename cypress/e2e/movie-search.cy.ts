@@ -7,7 +7,10 @@ describe('Movie Search', () => {
   })
 
   it('Check elements', () => {
-    cy.get('header h1').should('contain.text', appNameText)
+    cy.get('header').find('.logo').as('logo')
+    cy.get('@logo')
+      .should('contain.text', appNameText)
+      .find('a').should('have.attr', 'href', '/')
 
     cy.get('.search-bar').within(() => {
       cy.get('.search-input').should('be.empty')
@@ -29,8 +32,8 @@ describe('Movie Search', () => {
     cy.get('.search-bar').within(() => {
 
       cy.get('.search-input')
-        .type('Terminator')
-        .should('have.value', 'Terminator')
+        .type('scooby')
+        .should('have.value', 'scooby')
 
       cy.get('@searchButton').click().wait(1000)
 
@@ -40,9 +43,8 @@ describe('Movie Search', () => {
 
     cy.get('.search-results').within(() => {
       //define expected results
-      const total = 95;
+      const total = 97;
       const step = 10;
-
 
       // check number of results
       cy.get('h2').should('contain.text', `Found ${total} movies`)
@@ -71,7 +73,7 @@ describe('Movie Search', () => {
       cy.wrap($movieItem).as('movieItem')
       cy.get('@movieItem').within(() => {
         cy.get('a').should('have.attr', 'href', `/movie/${$movieItem.data('movie-id')}`)
-        cy.get('.favourite-button-wrapper').should('exist')
+        cy.get('.favourite-button').should('exist')
       })
     })
   })
@@ -79,7 +81,7 @@ describe('Movie Search', () => {
 
   it('Add to favourites', () => {
     cy.get('.MuiGrid-root.MuiGrid-container').find('.movie-item').first().as('firstItem');
-    cy.get('@firstItem').find('.favourite-button-wrapper').find('button').as('favouriteButton')
+    cy.get('@firstItem').find('.favourite-button button').as('favouriteButton')
 
     cy.get('@firstItem').should('not.have.class', 'is-favourite')
     cy.get('header').find('.favourites-menu-button').should('not.exist')
@@ -97,13 +99,11 @@ describe('Movie Search', () => {
 
 
   it('Remove from favourites', () => {
-    // try ty add into favourites
     cy.get('.MuiGrid-root.MuiGrid-container').find('.movie-item').first().as('firstItem');
-    cy.get('@firstItem').find('.favourite-button-wrapper button').as('favouriteButton')
+    cy.get('@firstItem').find('.favourite-button button').as('favouriteButton')
 
     cy.get('@favouriteButton').click({ force: true })
 
-    // is not favourite
     cy.get('.favourites-menu-button').should('not.exist')
     cy.get('@firstItem').should('not.have.class', 'is-favourite')
 
@@ -118,7 +118,7 @@ describe('Movie Search', () => {
     cy.get('.search-results').should('not.exist')
   })
 
-  it('Non-existing movie search', () => {
+  it('Error: Movie not found', () => {
     cy.get('.search-button').as('searchButton')
 
     cy.get('.search-bar').within(() => {
@@ -128,11 +128,22 @@ describe('Movie Search', () => {
 
     cy.get('.search-results').should('not.exist')
 
-    cy.get('.Toastify').should('contain.text', 'Movie not found!')
-
+    cy.get('.Toastify').find('.Toastify__toast').should('have.class', 'Toastify__toast--error').should('contain.text', 'Movie not found!')
+    cy.get('.search-bar .cancel-button').click()
   })
+
+  it('Error: Too many results', () => {
+    cy.get('.search-button').as('searchButton')
+    cy.get('.search-bar').within(() => {
+      cy.get('.search-input').type('1')
+      cy.get('@searchButton').click().wait(1000)
+    })
+
+    cy.get('.search-results').should('not.exist')
+
+    cy.get('.Toastify').find('.Toastify__toast').should('have.class', 'Toastify__toast--error').should('contain.text', 'Too many results')
+  })
+
 })
-
-
 
 export { }
