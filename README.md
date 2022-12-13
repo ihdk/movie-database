@@ -94,3 +94,18 @@ Other folders:
 - `./src/assets` - additional files with small help functions, images and hooks that fetch data from database,
 - `./src/components` - React components divided to sub-folders by routes, components in the root of this folder are additional components that may be shared between main routes components
 - `./src/store` - files for React Redux store and appropriate reducers
+
+## Basic E2E tests
+
+Repository include basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:
+
+- run movie seach,
+- load more movies,
+- cancel search process,
+- ability to add/remove movie from favourites list,
+- displaying of appropriate notifications.
+
+Run tests:
+```bash
+npx cypress open
+```
