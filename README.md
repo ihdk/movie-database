@@ -40,7 +40,7 @@ npm start
 
 ## Application routes
 
-Application cosists from four routes splitted into separated chunks:
+The application cosists of four routes splitted into separated chunks:
 
 ### Movie Search
 
