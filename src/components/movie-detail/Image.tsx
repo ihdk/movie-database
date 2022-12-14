@@ -1,10 +1,7 @@
-import React from 'react';
-
 import useTheme from '@mui/material/styles/useTheme';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
-
 
 import type { MovieType } from '../../assets/types';
 

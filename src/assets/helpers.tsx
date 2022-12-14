@@ -1,10 +1,10 @@
-import React from 'react';
 import { toast } from 'react-toastify';
 import Typography from '@mui/material/Typography';
 
 import type { MovieType } from './types';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../store/store';
+
 /**
  * Simple plural text for internal use, ignore localization possibilities in this example
  * 
@@ -29,6 +29,12 @@ export const notify = (message: string, title?: string) => {
   </>)
 }
 
+/**
+ * Displays notification message
+ * 
+ * @param data movie data from database
+ * @returns MovieType movie data
+ */
 export const processFetchedMovie: (data: any) => MovieType = (data) => {
   return {
     id: data.imdbID,
@@ -46,10 +52,22 @@ export const processFetchedMovie: (data: any) => MovieType = (data) => {
   }
 }
 
+/**
+ * Check movie information availability
+ * 
+ * @param value movie text information
+ * @returns boolean
+ */
 const isAvailable = (value: string) => {
   return value.toLowerCase() !== 'n/a'
 }
 
+/**
+ * Check if movie is selected as favourite
+ * 
+ * @param movieId movie ID string
+ * @returns boolean
+ */
 export const useIsFavouriteMovie = (movieId: string) => {
   const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
   return favouriteMovies.filter(item => item.id === movieId).length > 0;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import useTheme from '@mui/material/styles/useTheme';
@@ -22,7 +22,6 @@ const SearchBar: React.FC = () => {
 
   // local storaga data
   const searchTerm = useSelector<RootStore, string>((state) => state.local.searchTerm);
-
 
   /**
    * Cancel search
@@ -63,6 +62,9 @@ const SearchBar: React.FC = () => {
     resetSearch();
   }
 
+  /**
+   * Search input component
+   */
   const SearchInput = () => {
     const [term, setSearchTerm] = useState(searchTerm);
     return <TextField
@@ -102,8 +104,7 @@ const SearchBar: React.FC = () => {
         <Button className="cancel-button" variant="text" size="large" onClick={handleCancel}>Cancel</Button>
       </Stack>
     </Paper>
-  );
-
+  )
 }
 
 export default SearchBar;

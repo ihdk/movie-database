@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
@@ -15,7 +13,6 @@ const Title: React.FC<{ movie: MovieType }> = ({ movie }) => {
       <Typography component="h1" variant="h4">{movie.title}</Typography>
       <FavouriteButton movie={movie} />
     </Stack>
-
   )
 }
 

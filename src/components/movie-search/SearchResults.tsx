@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import useTheme from '@mui/material/styles/useTheme';
@@ -38,6 +37,9 @@ const SearchResults: React.FC = () => {
     dispatch(updateLoadedPage(loadedPage + 1))
   }
 
+  /**
+   *  Load more button component
+   */
   const LoadMore = () => {
     if (loadedMovies.length >= total) return null;
 
@@ -73,8 +75,7 @@ const SearchResults: React.FC = () => {
         </Box>
       }
     </>
-  );
-
+  )
 }
 
 export default SearchResults;

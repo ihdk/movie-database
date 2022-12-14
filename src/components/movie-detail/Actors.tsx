@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useTheme from '@mui/material/styles/useTheme';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
