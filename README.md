@@ -108,8 +108,4 @@ Repository include basic Cypress end-to-end tests in `./cypress/e2e` folder to s
 Run tests:
 ```bash
 npx cypress open
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> cf2a120a58018d3e527783adb8082da1f838036e
