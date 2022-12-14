@@ -1,8 +1,8 @@
 # Movie Database
 
 ## Description
-Presentation React application written in TypeScript to get movies information from open source database [OMDb API](https://www.omdbapi.com/).
-Application allows you to search for movies, view their detail information and save them to own favourites list.
+Presentation React application written in TypeScript to get movie information from open source database [OMDb API](https://www.omdbapi.com/).
+Application allows you to search for movies, view their detail information and save them to your own favourites list.
 
 Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 
@@ -45,12 +45,12 @@ Application cosists from four routes splitted into separated chunks:
 ### Movie Search
 
 Movie search is the main page of application. Allows you to process search query and display found movies in the grid.
-Data are fetched from database using [Axios](https://www.npmjs.com/package/react-axios) and [ReactQuery](https://www.npmjs.com/package/react-query) maintain fetched and cached query results.
-Found results are stored locally in browser using [React Persist](https://www.npmjs.com/package/redux-persist) to maintain results and scroll position even the user leave application or browse through application routes.
+Data is fetched from the database using [Axios](https://www.npmjs.com/package/react-axios) and [ReactQuery](https://www.npmjs.com/package/react-query) maintains fetched and cached query results.
+Found results are stored locally in the browser using [React Persist](https://www.npmjs.com/package/redux-persist) to maintain results and scroll position even if the user leaves application or browses through application routes.
 
-Movies are loaded from database in groups of 10 movies (limitation of OMDb API) with ability to load more movies using button under the grid with movies.
+Movies are loaded from the database in groups of 10 movies (limitation of OMDb API) with ability to load more movies using a button under the grid with movies.
 
-Every movie can be added to own favourite list by clicking on the star icon displayed with movie.
+Every movie can be added to your own favourite list by clicking on the star icon displayed with the movie.
 
 Main component: `MovieSearch` in `./src/components/movie-search/MovieSearch`
 
@@ -61,9 +61,9 @@ Consists from components to render:
 
 ### Movie Detail
 
-Displays detail information of movie fetched from database.
+Displays detailed information of the movie fetched from database.
 
-Movie can be added into favourite list by clicking on the star icon displayed beside movie title.
+Movie can be added to your favourite list by clicking on the star icon displayed beside the movie title.
 
 Main component: `MovieDetail` in `./src/components/movie-detail/MovieDetail`
 
@@ -73,9 +73,9 @@ Consists from components to render:
 
 ### Favourites 
 
-Page displays selected favourite movies the same way as they are displayed in Movie Search page.
+Page displays selected favourite movies the same way as they are displayed in the Movie Search page.
 
-List of favourite movies is stored locally in browser using [React Persist](https://www.npmjs.com/package/redux-persist).
+List of favourite movies is stored locally in the browser using [React Persist](https://www.npmjs.com/package/redux-persist).
 
 Main component: `Favourites` in `./src/components/favourites/Favourites`
 
@@ -88,7 +88,7 @@ Main component: `NothingFound` in `./src/components/nothing-found/NothingFound`
 
 ## Files structure
 
-Root folder of application include main index file and core `App` component.
+Root folder of application includes the main index file and core `App` component.
 
 Other folders:
 - `./src/assets` - additional files with small help functions, images and hooks that fetch data from database,
@@ -99,11 +99,11 @@ Other folders:
 
 Repository include basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:
 
-- run movie seach,
+- run movie search,
 - load more movies,
 - cancel search process,
 - ability to add/remove movie from favourites list,
-- displaying of appropriate notifications.
+- displaying appropriate notifications.
 
 Run tests:
 ```bash
