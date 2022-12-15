@@ -97,7 +97,7 @@ Other folders:
 
 ## Basic E2E tests
 
-Repository include basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:
+Repository includes basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:
 
 - run movie search,
 - load more movies,
