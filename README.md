@@ -88,7 +88,7 @@ Other folders:
 - `./src/store` - files for React Redux store and appropriate reducers
 
 ## Basic components tests
-Available are basic examples of components tests in `./components` folder.
+Available are basic examples of components tests in `./src/components` folder.
 
 Run test:
 ```bash
