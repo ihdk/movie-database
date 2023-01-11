@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import HomeIcon from '@mui/icons-material/Home';
 
 import Logo from './Logo'
-import type { RootStore } from '../store/store';
+import type { RootStoreStateType } from '../store/store';
 import type { MovieType } from '../assets/types';
 
 /**
@@ -15,7 +15,7 @@ import type { MovieType } from '../assets/types';
  */
 const Header: React.FC<{ hideHome?: Boolean }> = ({ hideHome = false }) => {
   const theme = useTheme();
-  const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
+  const favouriteMovies = useSelector<RootStoreStateType, MovieType[]>((state) => state.local.favouriteMovies);
   
   return (
     <Container component="header" maxWidth={false} sx={{

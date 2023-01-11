@@ -10,7 +10,8 @@ import Paper from '@mui/material/Paper';
 import { InputAdornment } from '@mui/material';
 
 import { updateLoadedPage, setSearchTerm, resetLoadedMovies, setTotalMovies, setActiveQuery } from '../../store/slice'
-import type { RootStore } from '../../store/store';
+import type { RootStoreStateType } from '../../store/store';
+
 
 /**
  * Renders search bar to find movies
@@ -21,11 +22,8 @@ const SearchBar: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // local storaga data
-  const searchTerm = useSelector<RootStore, string>((state) => state.local.searchTerm);
+  const searchTerm = useSelector<RootStoreStateType, string>((state) => state.local.searchTerm);
 
-  /**
-   * Cancel search
-   */
   const resetSearch = () => {
     dispatch(setSearchTerm(""))
     dispatch(updateLoadedPage(0))
@@ -67,6 +65,7 @@ const SearchBar: React.FC = () => {
    */
   const SearchInput = () => {
     const [term, setSearchTerm] = useState(searchTerm);
+
     return <TextField
       size="medium"
       onChange={(e) => setSearchTerm(e.target.value)}

@@ -9,7 +9,7 @@ import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 
 import { setScrollPosition } from '../../store/slice';
-import type { RootStore } from '../../store/store';
+import type { RootStoreStateType } from '../../store/store';
 
 /**
  * Renders homepage with movies search
@@ -17,7 +17,7 @@ import type { RootStore } from '../../store/store';
 const MovieSearch: React.FC = () => {
   const dispatch = useDispatch();
   const bg = require('../../assets/images/bg.jpg');
-  const scrollPosition = useSelector<RootStore, number>((state) => state.local.scrollPosition);
+  const scrollPosition = useSelector<RootStoreStateType, number>((state) => state.local.scrollPosition);
 
   useEffect(() => {
     const setPosition = (e: BeforeUnloadEvent) => {

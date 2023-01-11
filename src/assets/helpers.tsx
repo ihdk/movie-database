@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 
 import type { MovieType } from './types';
 import { useSelector } from 'react-redux';
-import { RootStore } from '../store/store';
+import { RootStoreStateType } from '../store/store';
 
 /**
  * Simple plural text for internal use, ignore localization possibilities in this example
@@ -69,7 +69,7 @@ const isAvailable = (value: string) => {
  * @returns boolean
  */
 export const useIsFavouriteMovie = (movieId: string) => {
-  const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
+  const favouriteMovies = useSelector<RootStoreStateType, MovieType[]>((state) => state.local.favouriteMovies);
   return favouriteMovies.filter(item => item.id === movieId).length > 0;
 }
 

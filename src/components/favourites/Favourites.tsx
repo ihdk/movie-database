@@ -8,7 +8,7 @@ import Header from '../Header';
 import CoverImage from '../CoverImage';
 import MoviesGrid from '../MoviesGrid';
 
-import type { RootStore } from '../../store/store';
+import type { RootStoreStateType } from '../../store/store';
 import type { MovieType } from '../../assets/types';
 
 /**
@@ -17,7 +17,7 @@ import type { MovieType } from '../../assets/types';
 const Favourites: React.FC = () => {
   const theme = useTheme();
   const bg = require('../../assets/images/bg.jpg');
-  const favouriteMovies = useSelector<RootStore, MovieType[]>((state) => state.local.favouriteMovies);
+  const favouriteMovies = useSelector<RootStoreStateType, MovieType[]>((state) => state.local.favouriteMovies);
 
   return (
     <>

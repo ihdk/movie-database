@@ -12,7 +12,8 @@ const Logo: React.FC = () => {
     <Box className="logo">
       <Link href="/" underline="none" color="inherit" >
         <Typography component="div" variant="h4" sx={{
-          whiteSpace: 'nowrap', lineHeight: 1.5,
+          whiteSpace: 'nowrap', 
+          lineHeight: 1.5,
           background: theme.palette.background.fancy,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent"

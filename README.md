@@ -6,7 +6,6 @@ Application allows you to search for movies, view their detail information and s
 
 Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 
-
 ### Features
 
 - [Material UI](https://mui.com/) used for main design of app components
@@ -16,13 +15,6 @@ Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 - [React Redux](https://www.npmjs.com/package/react-redux) for global state management,
 - [React Persist](https://www.npmjs.com/package/redux-persist) for locally stored application states.
 
-
-### Instructions to run
-
-- fork this repository
-- clone your repository
-- install npm package manager
-- play with app, add own scripts and make it better
 
 ### Installation
 
@@ -95,9 +87,16 @@ Other folders:
 - `./src/components` - React components divided to sub-folders by routes, components in the root of this folder are additional components that may be shared between main routes components
 - `./src/store` - files for React Redux store and appropriate reducers
 
+## Basic components tests
+Available are basic examples of components tests in `./components` folder.
+
+Run test:
+```bash
+npm test
+```
 ## Basic E2E tests
 
-Repository include basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:
+Repository includes basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:
 
 - run movie seach,
 - load more movies,
@@ -105,11 +104,7 @@ Repository include basic Cypress end-to-end tests in `./cypress/e2e` folder to s
 - ability to add/remove movie from favourites list,
 - displaying of appropriate notifications.
 
-Run tests:
+Run test:
 ```bash
 npx cypress open
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> cf2a120a58018d3e527783adb8082da1f838036e
