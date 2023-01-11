@@ -3,6 +3,7 @@
 ## Description
 Presentation React application written in TypeScript to get movie information from open source database [OMDb API](https://www.omdbapi.com/).
 Application allows you to search for movies, view their detail information and save them to your own favourites list.
+Visitor's search results and scroll position are remembered locally to show the last view, even the visitor left application.
 
 Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 
