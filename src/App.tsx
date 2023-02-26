@@ -1,87 +1,38 @@
-import { Suspense, lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
 import { ToastContainer } from 'react-toastify';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import createTheme from '@mui/material/styles/createTheme';
-import responsiveFontSizes from '@mui/material/styles/responsiveFontSizes';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
-import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/';
 
-import { persistor, store } from './store/store';
-import FullscreenLoader from './components/FullscreenLoader';
+import { persistor, store } from './app/store/store';
+import { FullscreenLoader } from './features/components';
 
-const MovieSearch = lazy(() => import('./components/movie-search/MovieSearch'));
-const Movie = lazy(() => import('./components/movie-detail/MovieDetail'));
-const Favourites = lazy(() => import('./components/favourites/Favourites'));
-const NothingFound = lazy(() => import('./components/nothing-found/NothingFound'));
+import { useThemeType } from './app/theme';
 
+const Home = lazy(() => import('./pages/home'));
+const Movie = lazy(() => import('./pages/movie-detail'));
+const Actor = lazy(() => import('./pages/actor-detail'));
+const Favourites = lazy(() => import('./pages/favourites'));
+const NothingFound = lazy(() => import('./pages/nothing-found'));
 
-// allow custom colors in MUI palette
-declare module '@mui/material/styles' {
-  interface TypeBackground {
-    fancy: string;
-    inputs: string;
-  }
-  interface Palette {
-    gold: string;
-  }
-  interface PaletteOptions {
-    gold: string;
-  }
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Screen />
+      </PersistGate>
+    </Provider >
+  );
 }
 
-
-/** MUI theme */
-let theme = createTheme({
-  typography: {
-    "fontFamily": "'Varela Round', sans-serif",
-  },
-  palette: {
-    mode: 'dark',
-    gold: "#ffbf00",
-    background: {
-      default: "#0a0a0a",
-      paper: alpha("#0a0a0a", 0.75),
-      fancy: "linear-gradient(45deg, #e54b6c 30%, #f87d3c 90%)",
-      inputs: alpha("#ffffff", 0.05),
-    },
-    primary: {
-      main: "#ffffff",
-    },
-    secondary: {
-      main: "#d2d2d2",
-    },
-  },
-  shape: {
-    borderRadius: 10,
-  }
-});
-
-theme = responsiveFontSizes(theme);
-
-/** Create and customize query client, do not refetch data on window focus */
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-
-/**
-  * Main app component
-  */
-const App: React.FC = () => {
+const Screen: React.FC = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <MovieSearch />
+      element: <Home />,
     },
     {
       path: "/favourites",
@@ -92,28 +43,25 @@ const App: React.FC = () => {
       element: <Movie />
     },
     {
+      path: "actor/:id",
+      element: <Actor />
+    },
+    {
       path: "*",
       element: <NothingFound />
     },
   ]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <QueryClientProvider client={queryClient}>
-            <CssBaseline />
-            <Box component="main">
-              <Suspense fallback={<FullscreenLoader />}>
-                <RouterProvider router={router} />
-              </Suspense>
-            </Box>
-            <ToastContainer autoClose={2000} theme="colored" />
-          </QueryClientProvider>
-        </PersistGate>
-      </Provider >
-    </ThemeProvider >
-  );
-}
+  const themeType = useThemeType()
 
+  return (
+      <ThemeProvider theme={themeType}>
+        <CssBaseline />
+        <Suspense fallback={<FullscreenLoader />}>
+          <RouterProvider router={router} />
+        </Suspense>
+        <ToastContainer autoClose={2000} theme="colored" />
+      </ThemeProvider >
+  )
+}
 export default App;

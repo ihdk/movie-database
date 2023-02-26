@@ -1,13 +1,12 @@
 import React, { PropsWithChildren } from 'react'
-import { render } from '@testing-library/react'
+import { render, renderHook } from '@testing-library/react'
 import type { RenderOptions } from '@testing-library/react'
-import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
+import type { PreloadedState } from '@reduxjs/toolkit'
 
-import mockData from './test-mock-data';
-import { setupStore } from '../store/store'
-import type { RootReducerType, AppStoreType } from '../store/store'
-
+import { setupStore } from '../app/store/store'
+import mockData from './test-mock-data'
+import type { AppStoreType, RootReducerType } from '../app/store/store'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
     preloadedState?: PreloadedState<RootReducerType>
@@ -15,19 +14,35 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 }
 
 export const renderWithProviders = (
-    ui: React.ReactElement,
+    element: React.ReactElement,
     {
         preloadedState = {},
         store = setupStore(preloadedState),
         ...renderOptions
     }: ExtendedRenderOptions = {}
 ) => {
-    function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
+    const Wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => {
         return <Provider store={store}>{children}</Provider>
     }
-    return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+    return render(element, { wrapper: Wrapper, ...renderOptions })
+}
+
+
+export const renderHookWithProviders = <Props, Result>(
+    hook: (initialProps: Props) => Result,
+    {
+        preloadedState = {},
+        store = setupStore(preloadedState),
+        ...renderOptions
+    }: ExtendedRenderOptions = {}
+) => {
+    const Wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => {
+        return <Provider store={store}>{children}</Provider>
+    }
+    return renderHook(hook, { wrapper: Wrapper, ...renderOptions })
 }
 
 export const getMockData = (count = 10) => {
-    return mockData.slice(count > mockData.length ? mockData.length : (count <= 0 ? 1 : count - 1))
+    const returnResults = count > mockData.length ? mockData.length : (count <= 0 ? 1 : count)
+    return mockData.slice(0, returnResults)
 };
