@@ -97,7 +97,6 @@ interface NavigationButtonProps extends IconButtonProps {
 }
 
 const NavigationButton = styled(IconButton)<NavigationButtonProps>(({ theme, navigation }) => {
-  console.count(navigation)
   return ({
     color: theme.palette.primary.dark,
     background: theme.palette.background.whiteGradient,

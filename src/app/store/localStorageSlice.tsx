@@ -1,7 +1,7 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 
 import { moviesApiSlice } from './moviesApiSlice';
-import { MovieDetails, ThemeType } from '../types';
+import { MovieDetails, ThemeType, SearchResultsView } from '../types';
 
 export const initialState = {
   searchTerm: "",
@@ -10,6 +10,7 @@ export const initialState = {
   loadedPage: 0,
   totalMovies: 0,
   scrollPosition: 0,
+  searchResultsView: "grid" as SearchResultsView,
   themeType: "dark" as ThemeType
 }
 
@@ -40,6 +41,10 @@ const localSlice = createSlice({
       state.scrollPosition = action.payload;
     },
 
+    setSearchResultsView: (state, action: PayloadAction<SearchResultsView>) => {
+      state.searchResultsView = action.payload;
+    },
+
     switchTheme: (state, action: PayloadAction<ThemeType>) => {
       state.themeType = action.payload;
     },
@@ -62,6 +67,7 @@ export const {
   toggleFavouriteMovie,
   setSearchTerm,
   resetSearch,
+  setSearchResultsView,
   switchTheme,
 } = localSlice.actions
 

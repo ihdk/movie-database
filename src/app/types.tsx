@@ -1,4 +1,5 @@
 export type ThemeType = "dark" | "light"
+export type SearchResultsView = "grid" | "list"
 
 export interface MoviesApiError {
   status: number

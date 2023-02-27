@@ -5,7 +5,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 import { useNowPlayingQuery } from '../../app/store/moviesApiSlice';
 import { SectionTitle } from '../../features/components';
-import SimpleCard from '../../features/movie/SimpleCard';
+import GridCard from '../../features/movie/SimpleCard';
 import Swiper from '../../features/Swiper';
 
 
@@ -24,7 +24,7 @@ const NowPlaying: React.FC = React.memo(() => {
 
       {
         isSuccess &&
-        <Swiper slides={movies.map((movie, index) => <SimpleCard key={`${index}-${movie.id}`} movie={movie} />)} />
+        <Swiper slides={movies.map((movie, index) => <GridCard key={`${index}-${movie.id}`} movie={movie} />)} />
       }
 
     </>

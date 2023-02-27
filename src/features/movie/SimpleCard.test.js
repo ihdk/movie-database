@@ -6,7 +6,7 @@ import '@testing-library/jest-dom'
 import { getMockData, renderWithProviders } from '../../assets/test-utils'
 import SearchBar from "../search/SearchBar"
 import { initialState } from "../../app/store/localStorageSlice"
-import SimpleCard from "./SimpleCard"
+import GridCard from "./SimpleCard"
 
 
 
@@ -29,7 +29,7 @@ describe("Simple card", () => {
 
   it("should have closed popup on load", () => {
     act(() => {
-      renderWithProviders(<SimpleCard movie={data} />, { container: container })
+      renderWithProviders(<GridCard movie={data} />, { container: container })
     })
     expect(container.querySelector('.movie-item')).toBeInTheDocument()
     expect(container.querySelector('.card-popup')).not.toBeVisible()
@@ -38,7 +38,7 @@ describe("Simple card", () => {
   it("should NOT show popup on short hover", () => {
     jest.useFakeTimers()
     act(() => {
-      renderWithProviders(<SimpleCard movie={data} />, { container: container })
+      renderWithProviders(<GridCard movie={data} />, { container: container })
     })
 
     fireEvent.mouseEnter(container.querySelector('.movie-item'))
@@ -52,7 +52,7 @@ describe("Simple card", () => {
   it("should show popup on long hover and hide on hover out", () => {
     jest.useFakeTimers()
     act(() => {
-      renderWithProviders(<SimpleCard movie={data} />, { container: container })
+      renderWithProviders(<GridCard movie={data} />, { container: container })
     })
 
     fireEvent.mouseEnter(container.querySelector('.movie-item'))
@@ -68,14 +68,14 @@ describe("Simple card", () => {
 
   it("should link to movie detail", () => {
     act(() => {
-      renderWithProviders(<SimpleCard movie={data} />, { container: container })
+      renderWithProviders(<GridCard movie={data} />, { container: container })
     })
     expect(container.querySelector('.movie-item a').getAttribute('href')).toEqual(`/movie/${data.id}`)
   })
 
   it("should show movie image", () => {
     act(() => {
-      renderWithProviders(<SimpleCard movie={data} />, { container: container })
+      renderWithProviders(<GridCard movie={data} />, { container: container })
     })
     expect(getByRole(container, 'img', { name: data.title })).toBeInTheDocument()
     expect(getByRole(container, 'img', { name: data.title }).getAttribute('src')).toContain(data.poster_path)

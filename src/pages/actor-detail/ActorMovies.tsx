@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { useGetActorCreditsQuery } from '../../app/store/moviesApiSlice';
 import { FancyButton, Section, SectionTitle } from '../../features/components';
 import { ActorContext } from '../../features/context';
-import SimpleCard from '../../features/movie/SimpleCard';
+import GridCard from '../../features/movie/SimpleCard';
 import { __pl } from '../../app/helpers';
 
 
@@ -31,13 +31,13 @@ const ActorMovies: React.FC = React.memo(() => {
     ?
     <Section spacing='large' darkBg>
       <SectionTitle variant="h2" >
-        Actor known in <Typography variant="inherit" component="span" color="primary.fancy">{credits.length} movies</Typography>
+        Actor known in <Typography variant="inherit" component="span" color="primary.fancy">{credits.length} {__pl(["movie", "movies"], credits.length)}</Typography>
       </SectionTitle>
       <Grid container spacing={2} >
         {
           credits.slice(0, loadedMovies).map(movie =>
             <Grid item key={movie.id} lg={2} md={3} sm={4} xs={6}>
-              <SimpleCard movie={movie} />
+              <GridCard movie={movie} />
             </Grid>
           )
         }

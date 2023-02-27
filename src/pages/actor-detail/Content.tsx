@@ -2,21 +2,15 @@ import React, { useContext } from 'react';
 import dayjs from 'dayjs';
 
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from '@mui/material/styles';
 
-import { Section, SectionTitle, MovieScore } from '../../features/components';
+import { Section } from '../../features/components';
 import { ActorContext } from '../../features/context';
-import ActorCard from '../../features/movie/ActorCard';
-import MovieGenres from '../../features/movie/MovieGenres';
-import FavouriteButton from '../../features/FavouriteButton';
-import Swiper from '../../features/Swiper';
-import { useGetActorCreditsQuery } from '../../app/store/moviesApiSlice';
-import CircularProgress from '@mui/material/CircularProgress';
 
 
 /**
@@ -89,7 +83,7 @@ const Title: React.FC = React.memo(() => {
       }}
       >{actor.name}</Typography>
 
-      {actor.homepage && <Typography variant="subtitle2" component="a" href={actor.homepage} color={theme.palette.primary.fancy}>{actor.homepage}</Typography>}
+      {actor.homepage && <Typography variant="subtitle2" component="a" href={actor.homepage} target="_blank" color={theme.palette.primary.fancy}>{actor.homepage}</Typography>}
     </>
   )
 })
@@ -106,8 +100,8 @@ const DataLine: React.FC = React.memo(() => {
 
       {actor.place_of_birth && <Typography>{actor.place_of_birth}</Typography>}
 
-      {actor.birthday && <Typography>{dayjs(actor.birthday).format('DD. MMM YYYY')}</Typography>}
-      {actor.deathday && <Typography>{dayjs(actor.deathday).format('DD. MMM YYYY')}</Typography>}
+      {actor.birthday && <Typography>Born {dayjs(actor.birthday).format('DD. MMM YYYY')}</Typography>}
+      {actor.deathday && <Typography>Died in {dayjs(actor.deathday).format('DD. MMM YYYY')}</Typography>}
     </Stack >
   )
 })

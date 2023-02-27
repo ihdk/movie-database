@@ -10,41 +10,41 @@ import Typography from '@mui/material/Typography';
 import CardPopup from './CardPopup';
 import { MovieContext } from '../context';
 import { MovieDetails } from '../../app/types';
+import { TableCell, TableRow } from '@mui/material';
+import MovieGenres from './MovieGenres';
+import { FancyButton, MovieScore } from '../components';
+import FavouriteButton from '../FavouriteButton';
 
 
 /**
- * Renders simple movie card with details in popup
+ * Renders simple movie card in list view
  */
-const GridCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [openedPopup, setOpenedPopup] = useState(false);
-
-  let timer: ReturnType<typeof setTimeout>;
-  const openPopup = () => {
-    timer = setTimeout(() => {
-      setOpenedPopup(true)
-    }, 500)
-  };
-  const closePopup = () => {
-    clearTimeout(timer);
-    setOpenedPopup(false)
-  };
+const ListCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
 
   return (
     <MovieContext.Provider value={movie}>
       <Fade in={true}>
-        <Box
-          className="movie-item"
-          onMouseEnter={openPopup}
-          onMouseLeave={closePopup}
-          ref={cardRef}
-          sx={{ position: "relative", height: "100%" }}
-        >
-          <Link href={`/movie/${movie.id}`} underline="none" >
-            <Poster />
-            <CardPopup opened={openedPopup} cardRef={cardRef} />
-          </Link>
-        </Box>
+        <TableRow className="movie-item">
+
+          <TableCell>
+            <Link href={`/movie/${movie.id}`} underline="none" >
+              <Typography variant="h6" component="p">{movie.title}</Typography>
+            </Link>
+          </TableCell>
+          <TableCell>
+            {movie.genre_ids && <MovieGenres genresIds={movie.genre_ids} />}
+
+          </TableCell>
+          <TableCell>
+            {movie.vote_average > 0 && <MovieScore value={movie.vote_average * 10} />}
+          </TableCell>
+          <TableCell>
+            <FavouriteButton size="medium" />
+          </TableCell>
+          <TableCell>
+            <FancyButton href={`/movie/${movie.id}`} variant="contained" size="small" >Read more</FancyButton>
+          </TableCell>
+        </TableRow>
       </Fade>
     </MovieContext.Provider>
   )
@@ -60,13 +60,11 @@ const Poster: React.FC = React.memo(() => {
         ?
         <Box
           component="img"
-          height={350}
-          width="100%"
           src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
           alt={movie.title}
           sx={{
+            maxWidth: 100,
             display: "block",
-            objectFit: "cover",
             borderRadius: 1,
             [theme.breakpoints.down('md')]: {
               maxHeight: 350,
@@ -119,4 +117,4 @@ const MissingImagePlaceholder: React.FC = React.memo(() => {
   )
 })
 
-export default GridCard;
+export default ListCard;

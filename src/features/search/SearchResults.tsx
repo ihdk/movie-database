@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useTheme } from '@mui/material/styles';
@@ -9,19 +9,29 @@ import Grid from '@mui/material/Grid';
 import { useLazyGetMoviesQuery, useMovieQueryError } from '../../app/store/moviesApiSlice';
 import { __pl } from '../../app/helpers';
 import { RootStoreStateType } from '../../app/store/store';
-import { MovieDetails } from '../../app/types';
+import { MovieDetails, SearchResultsView } from '../../app/types';
 import { FancyLoadingButton, Section } from '../components';
-import SimpleCard from '../movie/SimpleCard';
-
-
+import GridCard from '../movie/SimpleCard';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import { setSearchResultsView } from '../../app/store/localStorageSlice';
+import ListCard from '../movie/ListCard';
+import { Table, TableBody, TableContainer } from '@mui/material';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
 /**
  * Renders search results with movies
  */
 const SearchResults: React.FC = () => {
   const theme = useTheme();
+
   const totalMovies = useSelector<RootStoreStateType, number>((state) => state.local.totalMovies);
   const movies = useSelector<RootStoreStateType, MovieDetails[]>((state) => state.local.movies);
-
+  const view = useSelector<RootStoreStateType, SearchResultsView>((state) => state.local.searchResultsView);
   const nextLoad = useMemo(() => { return totalMovies - movies.length >= 20 ? 20 : totalMovies - movies.length }, [totalMovies, movies.length])
 
   return movies.length > 0
@@ -29,23 +39,49 @@ const SearchResults: React.FC = () => {
     <Box className="search-results" sx={{ mt: theme.spacing(4) }}>
 
       <Section component="div" className="search-results-header" disableGutters>
-        <TitleTotal total={totalMovies} />
-        <TitleShowing showing={movies.length} total={totalMovies} />
+        <Section component="div" spacing="tiny" borderRadius={1} sx={{ background: theme.palette.background.defaultAlt }}>
+          <Stack spacing={2} sx={{
+            width: "100%",
+            justifyContent: "space-between"
+          }}>
+            <Box>
+              <TitleTotal total={totalMovies} />
+              <TitleShowing showing={movies.length} total={totalMovies} />
+            </Box>
+            <ViewToggle />
+          </Stack>
+        </Section>
       </Section>
 
-      <Grid container spacing={2}>
-        {movies.map((movie, index) => {
-          return (
-            <Grid item key={`${index}-${movie.id}`} lg={2} md={3} sm={4} xs={6} >
-              <SimpleCard movie={movie} />
-            </Grid>
-          )
-        })}
-      </Grid>
+      {view === "grid"
+        ?
+        <Grid container spacing={2}>
+          {movies.map((movie, index) => {
+            return (
+              <Grid item key={`${index}-${movie.id}`} lg={2} md={3} sm={4} xs={6} >
+                <GridCard movie={movie} />
+              </Grid>
+            )
+          })}
+        </Grid>
+        : <TableContainer >
+          <Table sx={{ borderRadius: 1, background: theme.palette.background.defaultAlt }}>
+            <TableBody>
+              {
+                movies.map((movie, index) => {
+                  return (
+                    <ListCard key={`${index}-${movie.id}`} movie={movie} />
+                  )
+                })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+      }
 
       {nextLoad > 0 && <LoadMore nextLoad={nextLoad} />}
 
-    </Box>
+    </Box >
     : null
 }
 
@@ -76,6 +112,26 @@ const LoadMore: React.FC<{ nextLoad: number }> = React.memo(({ nextLoad }) => {
       </FancyLoadingButton>
     </Section >
     : null
+})
+
+const ViewToggle: React.FC = React.memo(() => {
+  const dispatch = useDispatch()
+  const view = useSelector<RootStoreStateType, SearchResultsView>((state) => state.local.searchResultsView);
+
+  const setView = (newView: SearchResultsView) => {
+    dispatch(setSearchResultsView(newView))
+  }
+
+  return (
+    <ToggleButtonGroup size="small" value={view}>
+      <ToggleButton value="list" onClick={() => setView("list")}>
+        <ViewListIcon />
+      </ToggleButton>
+      <ToggleButton value="grid" onClick={() => setView("grid")}>
+        <ViewModuleIcon />
+      </ToggleButton>
+    </ToggleButtonGroup>
+  )
 })
 
 export default SearchResults;
