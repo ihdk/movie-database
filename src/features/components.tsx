@@ -10,8 +10,6 @@ import Stack from '@mui/material/Stack';
 import { Breakpoint, Container } from '@mui/material';
 
 
-
-
 interface SectionProps extends BoxProps {
   spacing?: 'none' | 'tiny' | 'small' | 'medium' | 'large'
   maxWidth?: Breakpoint
@@ -41,12 +39,12 @@ export const Section: React.FC<SectionProps> = React.memo(({
   return (
     <Box
       component="section"
+      overflow="hidden"
+      position="relative"
       sx={{
         ...sx,
         ...(darkBg && { background: theme.palette.background.defaultTransparent }),
         ...(spacing && { pt: theme.spacing(spacings[spacing]), pb: theme.spacing(spacings[spacing]) }),
-        overflow: "hidden",
-        position: "relative"
       }}
       {...props}
     >
@@ -62,7 +60,7 @@ interface PageWrapperProps extends BoxProps {
   noImage?: boolean
 }
 
-export const PageWrapper = ({ noImage = false, sx, children, ...props }: PageWrapperProps) => {
+export const PageWrapper: React.FC<PageWrapperProps> = ({ noImage = false, sx, children, ...props }) => {
   return (
     <Box
       sx={{
@@ -91,7 +89,7 @@ export const PageWrapper = ({ noImage = false, sx, children, ...props }: PageWra
 }
 
 
-export const ContentWrapper = ({ sx, children, ...props }: BoxProps) => {
+export const ContentWrapper: React.FC<BoxProps> = ({ sx, children, ...props }) => {
   return (
     <Box component="main"
       sx={{
@@ -308,7 +306,7 @@ export const StyledSwitcher = styled(Switch)(({ theme }) => {
       },
       "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor: theme.palette.background.light,//theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+        backgroundColor: theme.palette.background.light,
         borderRadius: height / 2,
         "&:before": {
           content: "''",

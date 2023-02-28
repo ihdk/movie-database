@@ -40,14 +40,14 @@ The application cosists of four routes splitted into separated chunks:
 
 Last search results, scroll position in search page and favourite movies are stored in local storage thanks to [Redux Persist](https://www.npmjs.com/package/redux-persist)
 
-<!--
 ## Basic components tests
-Available are basic examples of components tests in `./src/components` folder.
+Available are basic tests of some components.
 
 Run test:
 ```bash
 npm test
 ```
+<!--
 ## Basic E2E tests
 
 Repository includes basic Cypress end-to-end tests in `./cypress/e2e` folder to simulate few actions and check expected app behavior:

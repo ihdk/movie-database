@@ -16,7 +16,6 @@ import { FancyButton, MovieScore } from '../components';
  * Renders simple movie card in list view
  */
 const ListCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
-
   return (
     <MovieContext.Provider value={movie}>
       <Fade in={true}>
