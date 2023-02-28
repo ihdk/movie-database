@@ -1,15 +1,6 @@
 export type ThemeType = "dark" | "light"
 export type SearchResultsView = "grid" | "list"
 
-export interface MoviesApiError {
-  status: number
-  data: {
-    status_code: number
-    status_message: string
-    success: boolean
-  }
-}
-
 export interface MovieDetails {
   id: number
   title: string
@@ -26,11 +17,10 @@ export interface MovieDetails {
     id: number
     name: string
   }[]
-  credits: MovieCredits
-}
-export interface MovieCredits {
-  cast: ActorDetails[]
-  crew: CrewDetails[]
+  credits: {
+    cast: ActorDetails[]
+    crew: CrewDetails[]
+  }
 }
 
 export interface ActorDetails {
@@ -44,39 +34,13 @@ export interface ActorDetails {
   birthday: string
   deathday: string
   place_of_birth: string
-  known_for_department: string
 }
 
-interface CrewDetails {
+export interface CrewDetails {
   id: number
   name: string
   profile_path: string
   job: string
-}
-
-export interface MoviesSearchApiResponse {
-  results: MovieDetails[],
-  page: number,
-  total_results: number,
-  total_pages: number
-}
-
-export interface SearchData {
-  searchTerm: string,
-  page?: number
-}
-
-export interface GenresApiResponse {
-  genres: {
-    id: number
-    name: string
-  }[]
-}
-
-export interface ActorCreditsApiResponse {
-  id: number
-  cast: MovieDetails[]
-  crew: CrewDetails[]
 }
 
 export interface Genres {
