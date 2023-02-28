@@ -33,8 +33,9 @@ npm start
 
 The application cosists of four routes splitted into separated chunks:
 
-- Home with search form and search results
+- Homepage with search functionality
 - Movie detail page 
+- Actor detail page
 - Favourite movies page
 - 404 page
 
