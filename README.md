@@ -10,7 +10,7 @@ Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 
 - [Material UI](https://mui.com/) used for general design of app components
 - [React Router](https://www.npmjs.com/package/react-router) to create site routes,
-- [React Redux](https://www.npmjs.com/package/react-redux) for app state management,
+- [React Redux](https://www.npmjs.com/package/react-redux) for general app state management,
 - [Redux Persist](https://www.npmjs.com/package/redux-persist) for local storage state management,
 - [Redux Toolkit Query](https://www.npmjs.com/package/react-query) to maintain fetched and cached query results.
 
