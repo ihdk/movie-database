@@ -1,19 +1,15 @@
-import React, { useContext, useRef, useState } from 'react';
+import React from 'react';
 
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Fade from '@mui/material/Fade';
-import TheatersIcon from '@mui/icons-material/Theaters';
 import Typography from '@mui/material/Typography';
+import { TableCell, TableRow } from '@mui/material';
 
-import CardPopup from './CardPopup';
 import { MovieContext } from '../context';
 import { MovieDetails } from '../../app/types';
-import { TableCell, TableRow } from '@mui/material';
 import MovieGenres from './MovieGenres';
-import { FancyButton, MovieScore } from '../components';
 import FavouriteButton from '../FavouriteButton';
+import { FancyButton, MovieScore } from '../components';
 
 
 /**
@@ -47,73 +43,6 @@ const ListCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
         </TableRow>
       </Fade>
     </MovieContext.Provider>
-  )
-})
-
-
-const Poster: React.FC = React.memo(() => {
-  const theme = useTheme();
-  const movie = useContext(MovieContext)
-  return (
-    <Box position="relative">
-      {movie.poster_path
-        ?
-        <Box
-          component="img"
-          src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-          alt={movie.title}
-          sx={{
-            maxWidth: 100,
-            display: "block",
-            borderRadius: 1,
-            [theme.breakpoints.down('md')]: {
-              maxHeight: 350,
-            },
-            [theme.breakpoints.down('sm')]: {
-              maxHeight: 330,
-            },
-          }}
-        />
-        : <MissingImagePlaceholder />
-      }
-    </Box>
-  )
-})
-
-
-const MissingImagePlaceholder: React.FC = React.memo(() => {
-  const theme = useTheme();
-  const movie = useContext(MovieContext)
-  return (
-    <Box sx={{
-      height: "100%",
-      minHeight: 350,
-      background: theme.palette.background.defaultAlt,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      borderRadius: 1,
-      [theme.breakpoints.down('md')]: {
-        minHeight: 350,
-      },
-      [theme.breakpoints.down('sm')]: {
-        minHeight: 330,
-      },
-    }}>
-      {movie && <Typography align="center" color="text.primary" variant="h6" sx={{ p: theme.spacing(2, 1), zIndex: 1 }}>{movie.title}</Typography>}
-      <Box sx={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}>
-        <TheatersIcon sx={{ opacity: 0.1, fontSize: "10rem" }} />
-      </Box>
-    </Box >
   )
 })
 

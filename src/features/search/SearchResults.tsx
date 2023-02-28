@@ -1,34 +1,32 @@
-import React, { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
+import Stack from '@mui/material/Stack';
+import { Table, TableBody, TableContainer } from '@mui/material';
 
-import { useLazyGetMoviesQuery, useMovieQueryError } from '../../app/store/moviesApiSlice';
 import { __pl } from '../../app/helpers';
+import { useLazyGetMoviesQuery, useMovieQueryError } from '../../app/store/moviesApiSlice';
+import { setSearchResultsView } from '../../app/store/localStorageSlice';
 import { RootStoreStateType } from '../../app/store/store';
 import { MovieDetails, SearchResultsView } from '../../app/types';
 import { FancyLoadingButton, Section } from '../components';
 import GridCard from '../movie/SimpleCard';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ToggleButton from '@mui/material/ToggleButton';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { useDispatch } from 'react-redux';
-import { setSearchResultsView } from '../../app/store/localStorageSlice';
 import ListCard from '../movie/ListCard';
-import { Table, TableBody, TableContainer } from '@mui/material';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import ViewModuleIcon from '@mui/icons-material/ViewModule';
+
+
 /**
  * Renders search results with movies
  */
 const SearchResults: React.FC = () => {
   const theme = useTheme();
-
   const totalMovies = useSelector<RootStoreStateType, number>((state) => state.local.totalMovies);
   const movies = useSelector<RootStoreStateType, MovieDetails[]>((state) => state.local.movies);
   const view = useSelector<RootStoreStateType, SearchResultsView>((state) => state.local.searchResultsView);

@@ -88,7 +88,7 @@ export const FavouritesMenuButton: React.FC = React.memo(() => {
   const favouriteMovies = useSelector<RootStoreStateType, MovieDetails[]>((state) => state.local.favouriteMovies);
   return (
     <IconButton className="favourites-button" href="/favourites" size="large" >
-      <FavoriteIcon color="secondary" />
+      <FavoriteIcon />
       {favouriteMovies.length > 0 &&
         <Zoom in={true}>
           <Typography className="count" color="primary.main" component="span" sx={{

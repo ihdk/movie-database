@@ -96,10 +96,7 @@ const DataLine: React.FC = React.memo(() => {
       spacing={2}
       divider={<Divider orientation="vertical" flexItem />}
     >
-      {actor.known_for_department && <Typography>{actor.known_for_department}</Typography>}
-
       {actor.place_of_birth && <Typography>{actor.place_of_birth}</Typography>}
-
       {actor.birthday && <Typography>Born {dayjs(actor.birthday).format('DD. MMM YYYY')}</Typography>}
       {actor.deathday && <Typography>Died in {dayjs(actor.deathday).format('DD. MMM YYYY')}</Typography>}
     </Stack >

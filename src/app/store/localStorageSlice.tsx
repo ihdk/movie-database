@@ -33,7 +33,7 @@ const localSlice = createSlice({
 
     toggleFavouriteMovie: (state, action: PayloadAction<{ movie: MovieDetails, add: boolean }>) => {
       state.favouriteMovies = action.payload.add
-        ? [...state.favouriteMovies, action.payload.movie]
+        ? [action.payload.movie, ...state.favouriteMovies]
         : state.favouriteMovies.filter((item) => item.id !== action.payload.movie.id)
     },
 
