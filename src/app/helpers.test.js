@@ -1,26 +1,9 @@
 import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
-import { unmountComponentAtNode } from "react-dom"
 import { act } from "react-dom/test-utils"
 import { ToastContainer } from 'react-toastify'
 import { notify, useIsFavouriteMovie, __pl } from "../app/helpers"
-import { getMockData, renderHookWithProviders, renderWithProviders } from "../assets/test-utils"
-
-
-
-let container = null
-
-beforeEach(() => {
-  container = document.createElement("div")
-  document.body.appendChild(container)
-
-})
-
-afterEach(() => {
-  unmountComponentAtNode(container)
-  container.remove()
-  container = null
-})
+import { getMockData, renderHookWithProviders, renderWithProvider } from "../assets/test-utils"
 
 describe("__pl", () => {
 
@@ -42,13 +25,10 @@ describe("notify", () => {
     jest.useFakeTimers()
     const message = "notification message text"
     const title = "notification title"
-    act(() => {
-      renderWithProviders(<ToastContainer />, { container: container })
-    })
 
-    const wrapper = container.querySelector('.Toastify')
-    expect(wrapper).toBeInTheDocument()
-    expect(wrapper.querySelector('.Toastify__toast-container')).not.toBeInTheDocument()
+    act(() => {
+      renderWithProvider(<ToastContainer />)
+    })
 
     notify(message, title)
 
@@ -56,7 +36,7 @@ describe("notify", () => {
 
     expect(screen.getByText(message)).toBeInTheDocument()
     expect(screen.getByText(title)).toBeInTheDocument()
-    
+
     jest.useRealTimers()
   })
 

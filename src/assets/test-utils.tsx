@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { render, renderHook } from '@testing-library/react'
 import type { RenderOptions } from '@testing-library/react'
+
 import { Provider } from 'react-redux'
 import type { PreloadedState } from '@reduxjs/toolkit'
 
@@ -13,8 +14,8 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
     store?: AppStoreType
 }
 
-export const renderWithProviders = (
-    element: React.ReactElement,
+export const renderWithProvider = (
+    ui: React.ReactElement,
     {
         preloadedState = {},
         store = setupStore(preloadedState),
@@ -24,7 +25,11 @@ export const renderWithProviders = (
     const Wrapper = ({ children }: PropsWithChildren<{}>): JSX.Element => {
         return <Provider store={store}>{children}</Provider>
     }
-    return render(element, { wrapper: Wrapper, ...renderOptions })
+    const rendered = render(ui, { wrapper: Wrapper, ...renderOptions })
+    return {
+        ...rendered,
+        rerender: (ui: React.ReactElement, options: ExtendedRenderOptions) => renderWithProvider(ui, { container: rendered.container, ...options })
+    }
 }
 
 

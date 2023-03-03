@@ -62,8 +62,8 @@ const CardPopup: React.FC<{ opened: boolean, cardRef: React.RefObject<HTMLDivEle
           boxShadow: 4,
           overflow: "hidden",
         }}>
-          {backdrop && <ImageWithOverlay image={backdrop} title={movie.title} color={theme.palette.background.defaultAlt} />}
 
+          {backdrop && <ImageWithOverlay image={backdrop} title={movie.title} color={theme.palette.background.defaultAlt} />}
 
           <Box sx={{ p: theme.spacing(2) }}>
             <Stack spacing={1} flexWrap="nowrap" justifyContent="space-between" sx={{ pb: theme.spacing(1) }}>
@@ -78,7 +78,6 @@ const CardPopup: React.FC<{ opened: boolean, cardRef: React.RefObject<HTMLDivEle
               <FancyButton variant="contained" >Read more</FancyButton>
               {movie.vote_average > 0 && <MovieScore value={movie.vote_average * 10} />}
             </Stack>
-
           </Box>
 
         </Box>

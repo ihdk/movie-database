@@ -48,7 +48,7 @@ const Header: React.FC<{ hideHome?: boolean }> = React.memo(({ hideHome = false 
           <Logo className="logo-part" />
           <Stack className="menu-buttons-part" spacing={1}>
             <FavouritesMenuButton />
-            {!hideHome && <IconButton className="home-button" href="/" size="large"><HomeIcon /></IconButton>}
+            {!hideHome && <IconButton className="home-button" href="/" size="large" aria-label="homepage menu link"><HomeIcon /></IconButton>}
             <ThemeSwitcher />
           </Stack>
         </Stack>
@@ -61,7 +61,7 @@ const Logo: React.FC<BoxProps> = React.memo((props) => {
   const theme = useTheme();
   return (
     <Box {...props}>
-      <Link href="/" underline="none">
+      <Link href="/" underline="none" aria-label="homepage logo link">
         <Stack spacing={1} direction="row" sx={{
           fontSize: theme.typography.h1.fontSize,
           alignItems: "center",
@@ -87,11 +87,11 @@ const Logo: React.FC<BoxProps> = React.memo((props) => {
 export const FavouritesMenuButton: React.FC = React.memo(() => {
   const favouriteMovies = useSelector<RootStoreStateType, MovieDetails[]>((state) => state.local.favouriteMovies);
   return (
-    <IconButton className="favourites-button" href="/favourites" size="large" >
+    <IconButton href="/favourites" size="large" aria-label="favourite movies menu link">
       <FavoriteIcon />
       {favouriteMovies.length > 0 &&
         <Zoom in={true}>
-          <Typography className="count" color="primary.main" component="span" sx={{
+          <Typography className="count" aria-label='favourite movies count' color="primary.main" component="span" sx={{
             position: "absolute",
             top: 0,
             right: 0,
@@ -119,7 +119,7 @@ export const ThemeSwitcher: React.FC = React.memo(() => {
   return (
     <Box sx={{ display: "flex" }}>
       <Divider orientation="vertical" variant="middle" flexItem sx={{ m: (theme) => theme.spacing(0, 2, 0, 1) }} />
-      <StyledSwitcher checked={themeType === "dark"} onClick={handleSwitcher} />
+      <StyledSwitcher checked={themeType === "dark"} onClick={handleSwitcher} inputProps={{ "aria-label": "theme switcher" }} />
     </Box>
   )
 })

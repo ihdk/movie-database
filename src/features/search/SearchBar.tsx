@@ -66,15 +66,15 @@ const SearchBar: React.FC = React.memo(() => {
               borderColor: theme.palette.primary.borders,
             },
           }}
-          inputProps={{ autoComplete: "off", className: "search-input" }}
+          inputProps={{ autoComplete: "off" }}
           InputProps={{
             startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
-            ...((currentSearchTerm || movies.length > 0) && { endAdornment: <InputAdornment position="end"><IconButton className="cancel-button" onClick={handleCancel} ><ClearIcon /></IconButton></InputAdornment> })
+            ...((currentSearchTerm || movies.length > 0) && { endAdornment: <InputAdornment position="end"><IconButton aria-label="cancel" onClick={handleCancel} ><ClearIcon /></IconButton></InputAdornment> })
           }}
           onKeyPress={(e) => e.key === 'Enter' ? handleSearch() : null}
         />
 
-        <FancyLoadingButton loading={isFetching} className="search-button" variant="contained" size="large" onClick={handleSearch} sx={{ whiteSpace: "nowrap" }}>
+        <FancyLoadingButton loading={isFetching}  variant="contained" size="large" onClick={handleSearch} sx={{ whiteSpace: "nowrap" }}>
           Find movie
         </FancyLoadingButton>
       </Stack>

@@ -1,62 +1,54 @@
-import { unmountComponentAtNode } from "react-dom"
-import { act, Simulate } from "react-dom/test-utils"
-import { fireEvent, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-
-import { renderWithProviders } from '../../assets/test-utils'
-import SearchBar from "./SearchBar"
+import { act } from "react-dom/test-utils"
+import { fireEvent, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { renderWithProvider } from '../../assets/test-utils'
 import { initialState } from "../../app/store/localStorageSlice"
+import SearchBar from "./SearchBar"
 
-
-let container = null
-
-beforeEach(() => {
-  container = document.createElement("div")
-  document.body.appendChild(container)
-
-})
-
-afterEach(() => {
-  unmountComponentAtNode(container)
-  container.remove()
-  container = null
-})
 
 describe("Search bar", () => {
 
-  it("should render empty input and button", () => {
+  it("should render empty search input and button", () => {
     act(() => {
-      renderWithProviders(<SearchBar />, { container: container })
+      renderWithProvider(<SearchBar />)
     })
-    expect(container.querySelector('button')).toBeInTheDocument()
-    expect(container.querySelector('input').value).toEqual('')
+    expect(screen.getByRole('button', { name: /find movie/i })).toBeInTheDocument()
+    expect(screen.getByRole('textbox').value).toEqual('')
   })
 
-  it("should render input with search phrase", () => {
+  it("should render input with stored search phrase", () => {
     const phrase = "search phrase"
     act(() => {
-      renderWithProviders(<SearchBar />, { container: container, preloadedState: { local: { ...initialState, searchTerm: phrase } } })
+      renderWithProvider(<SearchBar />, { preloadedState: { local: { ...initialState, searchTerm: phrase } } })
     })
-    expect(container.querySelector('input').value).toEqual(phrase)
+    expect(screen.getByRole('textbox').value).toEqual(phrase)
   })
 
-  it("should not show reset button when empty input", () => {
-    act(() => {
-      renderWithProviders(<SearchBar />, { container: container })
-    })
-    expect(container.querySelector('.cancel-button')).not.toBeInTheDocument()
-  })
-
-  it("should reset search input with reset button", () => {
+  it("should show reset button only with text in input", async () => {
     const phrase = "search phrase"
     act(() => {
-      renderWithProviders(<SearchBar />, { container: container, preloadedState: { local: { ...initialState, searchTerm: phrase } } })
+      renderWithProvider(<SearchBar />)
+    })
+    expect(screen.queryByRole('button', { name: /cancel/i })).not.toBeInTheDocument()
+    await userEvent.type(screen.getByRole('textbox'), phrase)
+    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument()
+
+  })
+
+  it("should reset search input with reset button", async () => {
+    const phrase = "search phrase"
+    act(() => {
+      renderWithProvider(<SearchBar />)
     })
 
-    fireEvent.click(container.querySelector('.cancel-button'))
-    
-    expect(container.querySelector('input').value).toEqual('')
-    expect(container.querySelector('.cancel-button')).not.toBeInTheDocument()
+    await userEvent.type(screen.getByRole('textbox'), phrase)
+    expect(screen.getByRole('textbox', { value: phrase })).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: /cancel/i }))
+
+    expect(screen.getByRole('textbox').value).toEqual('')
+    expect(screen.queryByRole('button', { name: /cancel/i })).not.toBeInTheDocument()
   })
 
 })

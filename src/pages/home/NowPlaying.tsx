@@ -5,7 +5,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 import { useNowPlayingQuery } from '../../app/store/moviesApiSlice';
 import { SectionTitle } from '../../features/components';
-import GridCard from '../../features/movie/SimpleCard';
+import GridCard from '../../features/movie/GridCard';
 import Swiper from '../../features/Swiper';
 
 

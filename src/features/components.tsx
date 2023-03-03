@@ -8,6 +8,7 @@ import Typography, { TypographyProps } from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import { Breakpoint, Container } from '@mui/material';
+import { __pl } from '../app/helpers';
 
 
 interface SectionProps extends BoxProps {
@@ -196,14 +197,12 @@ export const MovieScore: React.FC<MovieScoreProps> = React.memo(({ value, isMovi
           <Typography
             variant="h4"
             component="div"
-            //color="text.secondary"
             textTransform="uppercase"
             sx={{ m: 0 }}
           >user score</Typography>
           <Typography
             variant="caption"
             component="div"
-            //color="text.secondary"
             textTransform="uppercase"
             sx={{ m: 0 }}
           >based on {votes} votes</Typography>
@@ -256,6 +255,17 @@ export const FullscreenLoader: React.FC = () => {
     }}><CircularProgress /></Box>
   )
 }
+
+
+export const LoadMore: React.FC<{ nextLoad: number, onLoadMore: () => void, loading?: boolean }> = React.memo(({ nextLoad, onLoadMore, loading = false }) => {
+  return nextLoad > 0
+    ? <Section component="div" spacing="small" sx={{ textAlign: "center" }}>
+      <FancyLoadingButton loading={loading} variant="contained" size="large" onClick={onLoadMore}>
+        {nextLoad} more {__pl(["movie", "movies"], nextLoad)}
+      </FancyLoadingButton>
+    </Section >
+    : null
+})
 
 
 export const StyledSwitcher = styled(Switch)(({ theme }) => {

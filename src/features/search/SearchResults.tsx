@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTheme } from '@mui/material/styles';
@@ -17,8 +17,8 @@ import { useLazyGetMoviesQuery, useMovieQueryError } from '../../app/store/movie
 import { setSearchResultsView } from '../../app/store/localStorageSlice';
 import { RootStoreStateType } from '../../app/store/store';
 import { MovieDetails, SearchResultsView } from '../../app/types';
-import { FancyLoadingButton, Section } from '../components';
-import GridCard from '../movie/SimpleCard';
+import { LoadMore, Section } from '../components';
+import GridCard from '../movie/GridCard';
 import ListCard from '../movie/ListCard';
 
 
@@ -28,8 +28,18 @@ import ListCard from '../movie/ListCard';
 const SearchResults: React.FC = () => {
   const theme = useTheme();
   const totalMovies = useSelector<RootStoreStateType, number>((state) => state.local.totalMovies);
+  const loadedPage = useSelector<RootStoreStateType, number>((state) => state.local.loadedPage);
+  const searchTerm = useSelector<RootStoreStateType, string>((state) => state.local.searchTerm);
   const movies = useSelector<RootStoreStateType, MovieDetails[]>((state) => state.local.movies);
   const view = useSelector<RootStoreStateType, SearchResultsView>((state) => state.local.searchResultsView);
+
+  const [triggerGetMovies, { isError, error, isFetching }] = useLazyGetMoviesQuery()
+  useMovieQueryError(isError, error);
+
+  const onLoadMore = useCallback(() => {
+    triggerGetMovies({ searchTerm: searchTerm, page: loadedPage + 1 })
+  }, [searchTerm, loadedPage, triggerGetMovies])
+
   const nextLoad = useMemo(() => { return totalMovies - movies.length >= 20 ? 20 : totalMovies - movies.length }, [totalMovies, movies.length])
 
   return movies.length > 0
@@ -77,7 +87,7 @@ const SearchResults: React.FC = () => {
         </TableContainer>
       }
 
-      {nextLoad > 0 && <LoadMore nextLoad={nextLoad} />}
+      <LoadMore nextLoad={nextLoad} onLoadMore={onLoadMore} loading={isFetching} />
 
     </Box >
     : null
@@ -91,25 +101,6 @@ const TitleTotal: React.FC<{ total: number }> = React.memo(({ total }) => {
 const TitleShowing: React.FC<{ showing: number, total: number }> = React.memo(({ showing, total }) => {
   const text = `Showing ${showing} of ${total}`
   return <Typography variant="subtitle2" component="p">{text}</Typography>
-})
-
-const LoadMore: React.FC<{ nextLoad: number }> = React.memo(({ nextLoad }) => {
-  const searchTerm = useSelector<RootStoreStateType, string>((state) => state.local.searchTerm);
-  const loadedPage = useSelector<RootStoreStateType, number>((state) => state.local.loadedPage);
-  const [triggerGetMovies, { isError, error, isFetching }] = useLazyGetMoviesQuery()
-  useMovieQueryError(isError, error);
-
-  const onLoadMore = () => {
-    triggerGetMovies({ searchTerm: searchTerm, page: loadedPage + 1 })
-  }
-
-  return nextLoad > 0
-    ? <Section component="div" spacing="small" sx={{ textAlign: "center" }}>
-      <FancyLoadingButton className="load-more-button" loading={isFetching} variant="contained" size="large" onClick={onLoadMore}>
-        {nextLoad} more {__pl(["movie", "movies"], nextLoad)}
-      </FancyLoadingButton>
-    </Section >
-    : null
 })
 
 const ViewToggle: React.FC = React.memo(() => {

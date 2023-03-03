@@ -23,7 +23,7 @@ const ListCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
 
           <TableCell>
             <Link href={`/movie/${movie.id}`} underline="none" >
-              <Typography variant="h6" component="p">{movie.title}</Typography>
+              <Typography variant="h6" component="h3">{movie.title}</Typography>
             </Link>
           </TableCell>
           <TableCell>

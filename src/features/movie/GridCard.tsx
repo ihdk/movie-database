@@ -40,7 +40,7 @@ const GridCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
           ref={cardRef}
           sx={{ position: "relative", height: "100%" }}
         >
-          <Link href={`/movie/${movie.id}`} underline="none" >
+          <Link href={`/movie/${movie.id}`} underline="none" aria-label="movie detail link" >
             <Poster />
             <CardPopup opened={openedPopup} cardRef={cardRef} />
           </Link>
@@ -102,7 +102,7 @@ const MissingImagePlaceholder: React.FC = React.memo(() => {
         minHeight: 330,
       },
     }}>
-      {movie && <Typography align="center" color="text.primary" variant="h6" sx={{ p: theme.spacing(2, 1), zIndex: 1 }}>{movie.title}</Typography>}
+      {movie && <Typography align="center" color="text.primary" variant="h6" component="h3" sx={{ p: theme.spacing(2, 1), zIndex: 1 }}>{movie.title}</Typography>}
       <Box sx={{
         position: "absolute",
         top: 0,

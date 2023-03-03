@@ -4,9 +4,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import { useGetActorCreditsQuery } from '../../app/store/moviesApiSlice';
-import { FancyButton, Section, SectionTitle } from '../../features/components';
+import { LoadMore, Section, SectionTitle } from '../../features/components';
 import { ActorContext } from '../../features/context';
-import GridCard from '../../features/movie/SimpleCard';
+import GridCard from '../../features/movie/GridCard';
 import { __pl } from '../../app/helpers';
 
 
@@ -43,19 +43,11 @@ const ActorMovies: React.FC = React.memo(() => {
         }
       </Grid>
 
-      {nextLoad > 0 && <LoadMore nextLoad={nextLoad} loadMoreMovies={loadMoreMovies} />}
+      <LoadMore nextLoad={nextLoad} onLoadMore={loadMoreMovies} />
 
     </Section>
     : null
 })
 
-const LoadMore: React.FC<{ nextLoad: number, loadMoreMovies: () => void }> = React.memo(({ nextLoad, loadMoreMovies }) => nextLoad > 0
-  ? <Section component="div" spacing="small" sx={{ textAlign: "center" }}>
-    <FancyButton className="load-more-button" variant="contained" size="large" onClick={loadMoreMovies}>
-      {nextLoad} more {__pl(["movie", "movies"], nextLoad)}
-    </FancyButton>
-  </Section >
-  : null
-)
 
 export default ActorMovies;
