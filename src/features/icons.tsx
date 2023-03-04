@@ -1,11 +1,7 @@
-import React, { SVGProps } from 'react'
+import React, { SVGProps } from "react";
 
 export const TmdbLogo = React.memo((props: SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 423.04 35.4"
-    {...props}
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 423.04 35.4" {...props}>
     <defs>
       <linearGradient
         id="tmbl-logo-gradient"
@@ -29,7 +25,7 @@ export const TmdbLogo = React.memo((props: SVGProps<SVGSVGElement>) => (
       />
     </g>
   </svg>
-))
+));
 
 export const SiteLogo = React.memo((props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -107,6 +103,4 @@ export const SiteLogo = React.memo((props: SVGProps<SVGSVGElement>) => (
       d="M337.4 54.8C151 54.8 0 205.9 0 392.2c0 186.3 151 337.4 337.4 337.4 186.3 0 337.3-151.1 337.3-337.4 0-186.3-151-337.4-337.3-337.4zm0 79.8c48 0 87 39 87 87s-38.9 87-87 87c-48 0-87-38.9-87-87 0-48 38.9-87 87-87zm40.3 259.8c0 22.3-18.1 40.4-40.4 40.4-22.3 0-40.4-18.1-40.4-40.4 0-22.3 18.1-40.4 40.4-40.4 22.3 0 40.4 18.1 40.4 40.4zm-213.2 87c-48 0-87-38.9-87-87 0-48 38.9-87 87-87 48 0 87 38.9 87 87-.1 48.1-39 87-87 87zm172.9 172.9c-48 0-87-38.9-87-87 0-48 38.9-87 87-87 48 0 87 38.9 87 87-.1 48.1-39 87-87 87zm172.8-172.9c-48 0-87-38.9-87-87 0-48 38.9-87 87-87 48 0 87 38.9 87 87s-39 87-87 87z"
     />
   </svg>
-))
-
-
+));

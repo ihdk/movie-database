@@ -1,6 +1,7 @@
 # Movie Database
 
 ## Description
+
 React application written in TypeScript to present movie information from open source database [The Movie DB](https://www.themoviedb.org/).
 The application is developed for purposes of presentation, education and testing of new technologies.
 
@@ -13,7 +14,6 @@ Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 - [React Redux](https://www.npmjs.com/package/react-redux) for general app state management,
 - [Redux Persist](https://www.npmjs.com/package/redux-persist) for local storage state management,
 - [Redux Toolkit Query](https://www.npmjs.com/package/react-query) to maintain fetched and cached query results.
-
 
 ### Installation
 
@@ -34,20 +34,23 @@ npm start
 The application cosists of four routes splitted into separated chunks:
 
 - Homepage with search functionality
-- Movie detail page 
+- Movie detail page
 - Actor detail page
 - Favourite movies page
 - 404 page
 
-Last search results, scroll position in search page and favourite movies are stored in local storage thanks to [Redux Persist](https://www.npmjs.com/package/redux-persist)
+Last search results, favourite movies or choosen theme are stored in local storage thanks to [Redux Persist](https://www.npmjs.com/package/redux-persist).
 
 ## Basic components tests
+
 Available are basic tests of some components.
 
 Run test:
+
 ```bash
 npm test
 ```
+
 <!--
 ## Basic E2E tests
 

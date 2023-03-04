@@ -1,35 +1,35 @@
-import { alpha } from '@mui/material/styles';
-import { createTheme, ThemeOptions } from '@mui/material/styles';
-import responsiveFontSizes from '@mui/material/styles/responsiveFontSizes';
-import { useSelector } from 'react-redux';
-import { RootStoreStateType } from './store/store';
-import { ThemeType } from './types';
+import { alpha } from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
+import responsiveFontSizes from "@mui/material/styles/responsiveFontSizes";
+import { useSelector } from "react-redux";
+import { RootStoreStateType } from "./store/store";
+import { ThemeType } from "./types";
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface TypeBackground {
-    fancy: string
-    whiteGradient: string
-    fancyButton: string
-    defaultTransparent: string
-    defaultAlt: string
-    light: string
-    overlay: string
-    overlayDark: string
-    pageWrapper: string
+    fancy: string;
+    whiteGradient: string;
+    fancyButton: string;
+    defaultTransparent: string;
+    defaultAlt: string;
+    light: string;
+    overlay: string;
+    overlayDark: string;
+    pageWrapper: string;
   }
 
   interface TypeText {
-    movieContent?: string
+    movieContent?: string;
   }
 
   interface PaletteColor {
-    fancy?: string
-    borders?: string
+    fancy?: string;
+    borders?: string;
   }
 
   interface SimplePaletteColorOptions {
-    fancy?: string
-    borders?: string
+    fancy?: string;
+    borders?: string;
   }
 }
 
@@ -45,7 +45,6 @@ const themeBase: ThemeOptions = {
       fontSize: "2rem",
       fontWeight: "600",
       marginBottom: "1.7rem",
-
     },
     h3: {
       fontSize: "1.5rem",
@@ -84,6 +83,14 @@ const themeBase: ThemeOptions = {
     borderRadius: 10,
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        a { 
+          text-decoration: none; 
+          color: inherit;
+        }
+      `,
+    },
     MuiChip: {
       styleOverrides: {
         root: {
@@ -107,20 +114,19 @@ const themeBase: ThemeOptions = {
           props: { direction: "row" },
           style: {
             alignItems: "center",
-            flexWrap: "wrap"
-          }
-        }
-      ]
+            flexWrap: "wrap",
+          },
+        },
+      ],
     },
-
   },
-}
+};
 
-const themes: { dark: ThemeOptions, light: ThemeOptions } = {
+const themes: { dark: ThemeOptions; light: ThemeOptions } = {
   dark: {
     ...themeBase,
     palette: {
-      mode: 'dark',
+      mode: "dark",
       background: {
         default: "#0a0a0a",
         defaultAlt: "#151515",
@@ -131,11 +137,12 @@ const themes: { dark: ThemeOptions, light: ThemeOptions } = {
         fancyButton: "linear-gradient(45deg,#da3155 -5%,#f87d3c 50%,#da3155)",
         overlay: "linear-gradient(0deg,#0a0a0a,transparent 70%)",
         overlayDark: "linear-gradient(0deg,#0a0a0a,rgba(10, 10, 10, 0.7)25%)",
-        pageWrapper: "linear-gradient(135deg, rgb(10 10 10 / 95%) 20%, rgb(10 10 10 / 70%) )"
+        pageWrapper:
+          "linear-gradient(135deg, rgb(10 10 10 / 95%) 20%, rgb(10 10 10 / 70%) )",
       },
       text: {
         primary: "#ffffff",
-        secondary: alpha("#ffffff", 0.70),
+        secondary: alpha("#ffffff", 0.7),
         movieContent: "#ffffff",
       },
       primary: {
@@ -146,7 +153,7 @@ const themes: { dark: ThemeOptions, light: ThemeOptions } = {
       },
       secondary: {
         main: "#e7e7e7",
-        fancy: "#f87d3c"
+        fancy: "#f87d3c",
       },
     },
   },
@@ -163,12 +170,14 @@ const themes: { dark: ThemeOptions, light: ThemeOptions } = {
         whiteGradient: "linear-gradient(45deg, #ffffff 20%, #d8d8d8 90%)",
         fancyButton: "linear-gradient(45deg,#da3155 -5%,#f87d3c 50%,#da3155)",
         overlay: "linear-gradient(0deg,#ffffff,transparent 70%)",
-        overlayDark: "linear-gradient(0deg,#ffffff,rgba(255, 255, 255, 0.7)25%)",
-        pageWrapper: "linear-gradient(135deg, rgb(255 255 255 / 95%) 20%, rgb(255 255 255 / 70%) )"
+        overlayDark:
+          "linear-gradient(0deg,#ffffff,rgba(255, 255, 255, 0.7)25%)",
+        pageWrapper:
+          "linear-gradient(135deg, rgb(255 255 255 / 95%) 20%, rgb(255 255 255 / 70%) )",
       },
       text: {
         primary: "#727ba2",
-        secondary: alpha("#727ba2", 0.70),
+        secondary: alpha("#727ba2", 0.7),
         movieContent: "#454a5d",
       },
       primary: {
@@ -179,16 +188,15 @@ const themes: { dark: ThemeOptions, light: ThemeOptions } = {
       },
       secondary: {
         main: "#2e2e2e",
-        fancy: "#f87d3c"
+        fancy: "#f87d3c",
       },
-
     },
-  }
-}
-
-
+  },
+};
 
 export const useThemeType = () => {
-  const themeType = useSelector<RootStoreStateType, ThemeType>((state) => state.local.themeType);
+  const themeType = useSelector<RootStoreStateType, ThemeType>(
+    (state) => state.local.themeType
+  );
   return responsiveFontSizes(createTheme(themes[themeType]));
-}
+};

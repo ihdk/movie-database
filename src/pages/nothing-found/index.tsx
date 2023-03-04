@@ -1,30 +1,30 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-
-import { ContentWrapper, FancyButton, PageWrapper, Section } from '../../features/components';
-import Footer from '../Footer';
-import Header from '../Header';
-
+import { FancyButton, Section } from "../../features/components";
+import { useDocumentTitle } from "../../app/helpers";
 
 /**
  * Renders 404 page
  */
 const NothingFound: React.FC = () => {
-  const theme = useTheme();
+  useDocumentTitle("Page not found");
+
   return (
-    <PageWrapper>
-      <Header />
-      <ContentWrapper sx={{ textAlign: "center" }}>
-        <Section spacing='large'>
-          <Typography component="h1" variant="h4" sx={{ mb: theme.spacing(4) }} >Oops! That page can’t be found.</Typography>
-          <FancyButton href="/" size='large'>Go back to home</FancyButton>
-        </Section>
-      </ContentWrapper>
-      <Footer />
-    </PageWrapper>
-  )
-}
+    <Section spacing="large">
+      <Typography
+        component="h1"
+        variant="h4"
+        sx={{ mb: (theme) => theme.spacing(4) }}
+      >
+        Oops! That page can’t be found.
+      </Typography>
+      <Link to="/">
+        <FancyButton size="large">Go back to home</FancyButton>
+      </Link>
+    </Section>
+  );
+};
 
 export default NothingFound;
