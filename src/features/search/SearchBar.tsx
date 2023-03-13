@@ -79,7 +79,7 @@ const SearchBar: React.FC = React.memo(() => {
               borderColor: theme.palette.primary.borders,
             },
           }}
-          inputProps={{ autoComplete: "off" }}
+          inputProps={{ autoComplete: "off", "aria-label": "search input" }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

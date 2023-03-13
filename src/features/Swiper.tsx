@@ -80,6 +80,7 @@ const Swiper = <S extends React.ReactNode>({ slides }: SwiperPops<S>) => {
         size="large"
         navigation="prev"
         className="button-prev button-navigation"
+        aria-label="Previous slides"
       >
         <ArrowBackIosNewIcon fontSize="large" />
       </NavigationButton>
@@ -88,6 +89,7 @@ const Swiper = <S extends React.ReactNode>({ slides }: SwiperPops<S>) => {
         size="large"
         navigation="next"
         className="button-next button-navigation"
+        aria-label="Next slides"
       >
         <ArrowForwardIosIcon fontSize="large" />
       </NavigationButton>

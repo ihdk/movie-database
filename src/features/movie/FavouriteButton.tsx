@@ -41,7 +41,7 @@ const FavouriteButton: React.FC<FavouriteButtonType> = ({
     >
       <IconButton
         aria-label={
-          isFavourite ? "remove movie from favourites" : "Add to favourites"
+          isFavourite ? "Remove from favourites" : "Add to favourites"
         }
         onClick={handleFavourite}
         sx={{

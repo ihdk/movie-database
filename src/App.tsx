@@ -25,6 +25,9 @@ import { useThemeType } from "./app/theme";
 import Header from "./pages/Header";
 import Footer from "./pages/Footer";
 
+import "react-toastify/dist/ReactToastify.min.css";
+import "@fontsource/varela-round";
+
 const Home = lazy(() => import("./pages/home"));
 const Movie = lazy(() => import("./pages/movie-detail"));
 const Actor = lazy(() => import("./pages/actor-detail"));

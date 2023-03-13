@@ -178,6 +178,7 @@ export const MovieScore: React.FC<MovieScoreProps> = React.memo(
             value={value}
             variant="determinate"
             size={isMovieContent ? 100 : 40}
+            aria-label="movie user score"
             sx={{
               color: (theme) => theme.palette.primary.fancy,
               background: (theme) => theme.palette.background.light,
