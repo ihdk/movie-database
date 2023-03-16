@@ -59,7 +59,7 @@ const ThemedScreen: React.FC = () => {
 };
 
 const RootRoute: React.FC = () => {
-  let getKey = useCallback(
+  const getKey = useCallback(
     (location: Location, matches: ReturnType<typeof useMatches>) => {
       const match = matches.find((m) => (m.handle as any)?.restorationKey);
       if ((match?.handle as any)?.restorationKey === "pathname") {

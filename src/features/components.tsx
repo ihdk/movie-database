@@ -92,17 +92,12 @@ export const PageWrapper: React.FC<BoxProps> = ({ sx, children, ...props }) => {
   );
 };
 
-export const ContentWrapper: React.FC<BoxProps> = ({
-  sx,
-  children,
-  ...props
-}) => {
+export const ContentWrapper: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
     <Box
       component="main"
       sx={{
         minHeight: "70vh",
-        ...sx,
       }}
       {...props}
     >

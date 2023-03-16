@@ -23,11 +23,6 @@ const Content: React.FC = React.memo(() => {
   const movie = useContext(MovieContext);
   return (
     <>
-      {movie.images.logos.length > 0 && (
-        <Section spacing="large">
-          <Logo />
-        </Section>
-      )}
       <Section color="text.movieContent">
         <Grid container spacing={5}>
           {movie.poster_path && (
@@ -74,27 +69,6 @@ const Content: React.FC = React.memo(() => {
 
       <Actors />
     </>
-  );
-});
-
-const Logo: React.FC = React.memo(() => {
-  const movie = useContext(MovieContext);
-  return (
-    <Box
-      textAlign="center"
-      sx={{ maxWidth: 500, m: (theme) => theme.spacing(0, "auto") }}
-    >
-      <Box
-        component="img"
-        src={`https://image.tmdb.org/t/p/original${movie.images.logos[0].file_path}`}
-        alt={`Logo ${movie.title}`}
-        sx={{
-          display: "inline-block",
-          maxHeight: 500,
-          maxWidth: "100%",
-        }}
-      />
-    </Box>
   );
 });
 
