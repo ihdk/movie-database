@@ -7,7 +7,7 @@ The application is developed for purposes of presentation, education and testing
 
 Live demo can be found [here](https://ihdk-movie-database.netlify.app/).
 
-### Features
+### Technologies
 
 - [Material UI](https://mui.com/) used for general design of app components
 - [React Router](https://www.npmjs.com/package/react-router) to create site routes,

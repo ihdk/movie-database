@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useLocation, Location, useMatches } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -6,7 +7,6 @@ import Typography from "@mui/material/Typography";
 
 import { RootStoreStateType } from "./store/store";
 import { MovieDetails } from "./types";
-import { useLocation } from "react-router-dom";
 
 /**
  * Simple plural text for internal use, ignore localization possibilities in this example
@@ -71,7 +71,21 @@ export const useDocumentTitle: (title?: string) => void = (title) => {
  */
 export const useDefaultBackground = () => {
   const location = useLocation();
-  const rootpath = location.pathname.substring(1).split("/")[0];
-  const excludeInPaths = ["movie"];
-  return !excludeInPaths.includes(rootpath);
+  const rootPath = location.pathname.substring(1).split("/")[0];
+  const excludeInRoutes = ["movie"];
+  return !excludeInRoutes.includes(rootPath);
+};
+
+/*
+ * Get different type of key for different routes
+ */
+export const getRestorationKey = (
+  location: Location,
+  matches: ReturnType<typeof useMatches>
+) => {
+  const match = matches.find((m) => (m.handle as any)?.restorationKey);
+  if ((match?.handle as any)?.restorationKey === "pathname") {
+    return location.pathname;
+  }
+  return location.key;
 };
