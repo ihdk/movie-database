@@ -25,3 +25,5 @@ package-lock.json
 
 /cypress
 cypress.config.ts
+
+/.vscode
