@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-import { Section } from "../../features/components";
+import { Section, SectionTitle } from "../../features/components";
 import DetailCard from "../../features/movie/DetailCard";
 
 import { RootStoreStateType } from "../../app/store/store";
@@ -19,9 +19,7 @@ const Favourites: React.FC = () => {
 
   return (
     <Section>
-      <Typography component="h1" variant="h2">
-        Favourite movies
-      </Typography>
+      <SectionTitle variant="h1">Favourite movies</SectionTitle>
       <FavouritesList />
     </Section>
   );

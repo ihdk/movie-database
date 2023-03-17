@@ -10,7 +10,7 @@ import FavouriteButton from "./FavouriteButton";
 
 import MovieGenres from "./MovieGenres";
 import { FancyButton, ImageWithOverlay, MovieScore } from "../components";
-import { MovieContext } from "../context";
+import { MovieContext } from "../../app/context";
 
 const getPopupPosition = (cardRef: React.RefObject<HTMLDivElement>) => {
   if (cardRef.current) {
@@ -54,7 +54,7 @@ const CardPopup: React.FC<{
         top: "50%",
         transform: "translateY(-50%)",
         opacity: 0,
-        transition: "opacity 0.4s",
+        transition: "opacity 0.3s",
         zIndex: 5,
         ...(opened && { opacity: 1 }),
         ...(!opened && { pointerEvents: "none" }),
@@ -63,7 +63,7 @@ const CardPopup: React.FC<{
         ...(position === "center" && { left: "-50%" }),
       }}
     >
-      <Zoom in={opened} timeout={300}>
+      <Zoom in={opened} timeout={200}>
         <Box
           borderRadius={1}
           sx={{

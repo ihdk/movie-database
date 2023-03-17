@@ -5,14 +5,14 @@ import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import { TableCell, TableRow } from "@mui/material";
 
-import { MovieContext } from "../context";
+import { MovieContext } from "../../app/context";
 import { MovieDetails } from "../../app/types";
 import MovieGenres from "./MovieGenres";
 import FavouriteButton from "./FavouriteButton";
 import { FancyButton, MovieScore } from "../components";
 
 /**
- * Renders simple movie card in list view
+ * Renders movie card in list view
  */
 const ListCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
   return (
@@ -21,7 +21,7 @@ const ListCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
         <TableRow className="movie-item">
           <TableCell>
             <Link to={`/movie/${movie.id}`}>
-              <Typography variant="h6" component="h3">
+              <Typography variant="h6" component="h3" margin={0}>
                 {movie.title}
               </Typography>
             </Link>

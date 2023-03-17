@@ -120,7 +120,7 @@ export const moviesApiSlice = createApi({
       query: () =>
         `movie/top_rated?api_key=0c3f0750ff16ca7c4b32ebb707051867&page=1`,
       transformResponse: (response: MoviesApiResponse) => {
-        return response.results.slice(0, 6);
+        return response.results.slice(0, 9);
       },
     }),
 

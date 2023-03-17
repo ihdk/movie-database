@@ -39,7 +39,7 @@ export const renderWithProvider = (
   };
 };
 
-export const renderHookWithProviders = <Props, Result>(
+export const renderHookWithProvider = <Props, Result>(
   hook: (initialProps: Props) => Result,
   {
     preloadedState = {},

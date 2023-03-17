@@ -11,7 +11,7 @@ import {
   useMovieQueryError,
 } from "../../app/store/moviesApiSlice";
 import { Section } from "../../features/components";
-import { MovieContext } from "../../features/context";
+import { MovieContext } from "../../app/context";
 import { useDocumentTitle } from "../../app/helpers";
 
 /**
@@ -37,13 +37,11 @@ const Movie: React.FC = () => {
       )}
       {isSuccess && movie && (
         <MovieContext.Provider value={movie}>
-          <Cover
-            image={
-              movie.backdrop_path
-                ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-                : ""
-            }
-          />
+          {movie.backdrop_path && (
+            <Cover
+              image={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            />
+          )}
           <Content />
           <SimilarMovies />
         </MovieContext.Provider>
@@ -53,7 +51,7 @@ const Movie: React.FC = () => {
 };
 
 const Cover: React.FC<{ image: string }> = React.memo(({ image }) => {
-  return image ? (
+  return (
     <Box
       sx={{
         position: "absolute",
@@ -74,7 +72,7 @@ const Cover: React.FC<{ image: string }> = React.memo(({ image }) => {
         },
       }}
     />
-  ) : null;
+  );
 });
 
 export default Movie;

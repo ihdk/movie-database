@@ -8,11 +8,11 @@ import TheatersIcon from "@mui/icons-material/Theaters";
 import Typography from "@mui/material/Typography";
 
 import CardPopup from "./CardPopup";
-import { MovieContext } from "../context";
+import { MovieContext } from "../../app/context";
 import { MovieDetails } from "../../app/types";
 
 /**
- * Renders simple movie card with details in popup
+ * Renders movie card in grid view
  */
 const GridCard: React.FC<{ movie: MovieDetails }> = React.memo(({ movie }) => {
   const cardRef = useRef<HTMLDivElement>(null);

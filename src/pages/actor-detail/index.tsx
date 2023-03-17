@@ -10,11 +10,11 @@ import {
   useMovieQueryError,
 } from "../../app/store/moviesApiSlice";
 import { Section } from "../../features/components";
-import { ActorContext } from "../../features/context";
+import { ActorContext } from "../../app/context";
 import { useDocumentTitle } from "../../app/helpers";
 
 /**
- * Renders page with movie details
+ * Renders page with actor details
  */
 const Actor: React.FC = React.memo(() => {
   const { id } = useParams<{ id: string }>();

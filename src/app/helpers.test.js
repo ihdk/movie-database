@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import { notify, useIsFavouriteMovie, __pl } from "../app/helpers";
 import {
   getMockData,
-  renderHookWithProviders,
+  renderHookWithProvider,
   renderWithProvider,
 } from "../assets/test-utils";
 
@@ -47,7 +47,7 @@ describe("useIsFavouriteMovie", () => {
   it("should correctly check movie ID", () => {
     const data = getMockData(5);
     let id = "fakeID";
-    const { result, rerender } = renderHookWithProviders(
+    const { result, rerender } = renderHookWithProvider(
       () => useIsFavouriteMovie(id),
       { preloadedState: { local: { favouriteMovies: data } } }
     );

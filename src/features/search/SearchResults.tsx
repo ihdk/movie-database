@@ -1,16 +1,13 @@
 import React, { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import Stack from "@mui/material/Stack";
-import { Table, TableBody, TableContainer } from "@mui/material";
 
 import { __pl } from "../../app/helpers";
 import {
@@ -20,15 +17,12 @@ import {
 import { setSearchResultsView } from "../../app/store/localStorageSlice";
 import { RootStoreStateType } from "../../app/store/store";
 import { MovieDetails, SearchResultsView } from "../../app/types";
-import { LoadMore, Section } from "../components";
-import GridCard from "../movie/GridCard";
-import ListCard from "../movie/ListCard";
+import { LoadMore, MoviesList, Section } from "../components";
 
 /**
  * Renders search results with movies
  */
 const SearchResults: React.FC = () => {
-  const theme = useTheme();
   const totalMovies = useSelector<RootStoreStateType, number>(
     (state) => state.local.totalMovies
   );
@@ -53,18 +47,20 @@ const SearchResults: React.FC = () => {
     triggerGetMovies({ searchTerm: searchTerm, page: loadedPage + 1 });
   }, [searchTerm, loadedPage, triggerGetMovies]);
 
-  const nextLoad = useMemo(() => {
-    return totalMovies - movies.length >= 20 ? 20 : totalMovies - movies.length;
-  }, [totalMovies, movies.length]);
+  const nextLoad = useMemo(
+    () =>
+      totalMovies - movies.length >= 20 ? 20 : totalMovies - movies.length,
+    [totalMovies, movies.length]
+  );
 
   return movies.length > 0 ? (
-    <Box className="search-results" sx={{ mt: theme.spacing(4) }}>
+    <Box className="search-results" sx={{ mt: (theme) => theme.spacing(4) }}>
       <Section component="div" className="search-results-header" disableGutters>
         <Section
           component="div"
           spacing="tiny"
           borderRadius={1}
-          sx={{ background: theme.palette.background.defaultAlt }}
+          sx={{ background: (theme) => theme.palette.background.defaultAlt }}
         >
           <Stack
             spacing={2}
@@ -82,39 +78,7 @@ const SearchResults: React.FC = () => {
         </Section>
       </Section>
 
-      {view === "grid" ? (
-        <Grid container spacing={2}>
-          {movies.map((movie, index) => {
-            return (
-              <Grid
-                item
-                key={`${index}-${movie.id}`}
-                lg={2}
-                md={3}
-                sm={4}
-                xs={6}
-              >
-                <GridCard movie={movie} />
-              </Grid>
-            );
-          })}
-        </Grid>
-      ) : (
-        <TableContainer>
-          <Table
-            sx={{
-              borderRadius: 1,
-              background: theme.palette.background.defaultAlt,
-            }}
-          >
-            <TableBody>
-              {movies.map((movie, index) => {
-                return <ListCard key={`${index}-${movie.id}`} movie={movie} />;
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+      <MoviesList view={view} movies={movies} />
 
       <LoadMore
         nextLoad={nextLoad}

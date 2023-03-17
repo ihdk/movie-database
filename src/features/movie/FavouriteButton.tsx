@@ -8,7 +8,7 @@ import Tooltip, { tooltipClasses, TooltipProps } from "@mui/material/Tooltip";
 import { styled } from "@mui/material";
 
 import { toggleFavouriteMovie } from "../../app/store/localStorageSlice";
-import { MovieContext } from "../context";
+import { MovieContext } from "../../app/context";
 import { useIsFavouriteMovie } from "../../app/helpers";
 
 interface FavouriteButtonType extends IconButtonProps {
@@ -22,8 +22,8 @@ const FavouriteButton: React.FC<FavouriteButtonType> = ({
   floating = false,
   ...props
 }) => {
-  const theme = useTheme();
   const dispatch = useDispatch();
+  const theme = useTheme();
   const movie = useContext(MovieContext);
   const isFavourite = useIsFavouriteMovie(movie.id);
 

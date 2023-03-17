@@ -2,6 +2,7 @@ import React from "react";
 
 import Container from "@mui/material/Container";
 import Skeleton from "@mui/material/Skeleton";
+import Typography from "@mui/material/Typography";
 
 import { useNowPlayingQuery } from "../../app/store/moviesApiSlice";
 import { SectionTitle } from "../../features/components";
@@ -17,17 +18,21 @@ const NowPlaying: React.FC = React.memo(() => {
     <>
       <Container maxWidth="xl">
         <SectionTitle variant="h2">Now in cinemas</SectionTitle>
-        {isLoading && <LoadingPlaceholder />}
-        {isError && <>Failed to load</>}
+        {isError && <Typography>Failed to load</Typography>}
       </Container>
 
-      {isSuccess && (
-        <Swiper
-          slides={movies.map((movie, index) => (
-            <GridCard key={`${index}-${movie.id}`} movie={movie} />
-          ))}
-        />
-      )}
+      {isLoading && <LoadingPlaceholder />}
+
+      {isSuccess &&
+        (movies.length > 0 ? (
+          <Swiper
+            slides={movies.map((movie, index) => (
+              <GridCard key={`${index}-${movie.id}`} movie={movie} />
+            ))}
+          />
+        ) : (
+          <Typography>Not found movies</Typography>
+        ))}
     </>
   );
 });

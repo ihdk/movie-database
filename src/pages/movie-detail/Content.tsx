@@ -9,8 +9,13 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 
-import { Section, SectionTitle, MovieScore } from "../../features/components";
-import { MovieContext } from "../../features/context";
+import {
+  Section,
+  SectionTitle,
+  MovieScore,
+  Poster,
+} from "../../features/components";
+import { MovieContext } from "../../app/context";
 import ActorCard from "../../features/movie/ActorCard";
 import MovieGenres from "../../features/movie/MovieGenres";
 import FavouriteButton from "../../features/movie/FavouriteButton";
@@ -27,7 +32,10 @@ const Content: React.FC = React.memo(() => {
         <Grid container spacing={5}>
           {movie.poster_path && (
             <Grid item md={4} sm={5} xs={12}>
-              <Poster />
+              <Poster
+                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                title={movie.title}
+              />
             </Grid>
           )}
           <Grid item md={8} sm={7} xs={12}>
@@ -72,33 +80,12 @@ const Content: React.FC = React.memo(() => {
   );
 });
 
-const Poster: React.FC = React.memo(() => {
-  const movie = useContext(MovieContext);
-  return (
-    <Box textAlign="center" width="100%">
-      <Box
-        component="img"
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={movie.title}
-        boxShadow={5}
-        sx={{ borderRadius: 1, maxWidth: "100%" }}
-      />
-    </Box>
-  );
-});
-
 const Title: React.FC = React.memo(() => {
   const theme = useTheme();
   const movie = useContext(MovieContext);
   return (
     <>
-      <Typography
-        variant="h1"
-        sx={{
-          mt: theme.spacing(6),
-          mb: 0,
-        }}
-      >
+      <Typography variant="h1" sx={{ mb: 0 }}>
         {movie.title}
       </Typography>
 

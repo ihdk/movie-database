@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 
 import MovieGenres from "./MovieGenres";
 import FavouriteButton from "./FavouriteButton";
-import { MovieContext } from "../context";
+import { MovieContext } from "../../app/context";
 import { MovieDetails } from "../../app/types";
 import { FancyButton, ImageWithOverlay, MovieScore } from "../components";
 

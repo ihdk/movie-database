@@ -9,8 +9,8 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme } from "@mui/material/styles";
 
-import { Section } from "../../features/components";
-import { ActorContext } from "../../features/context";
+import { Poster, Section } from "../../features/components";
+import { ActorContext } from "../../app/context";
 
 /**
  * Renders actor content
@@ -23,9 +23,13 @@ const Content: React.FC = React.memo(() => {
         <Grid container spacing={5}>
           {actor.profile_path && (
             <Grid item md={4} sm={5} xs={12}>
-              <Poster />
+              <Poster
+                image={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                title={actor.name}
+              />
             </Grid>
           )}
+
           <Grid item md={8} sm={7} xs={12}>
             <Section spacing="none" component="div" disableGutters>
               <Title />
@@ -56,33 +60,12 @@ const Content: React.FC = React.memo(() => {
   );
 });
 
-const Poster: React.FC = React.memo(() => {
-  const actor = useContext(ActorContext);
-  return (
-    <Box textAlign="center" width="100%">
-      <Box
-        component="img"
-        src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-        alt={actor.name}
-        boxShadow={5}
-        sx={{ borderRadius: 1, maxWidth: "100%" }}
-      />
-    </Box>
-  );
-});
-
 const Title: React.FC = React.memo(() => {
   const theme = useTheme();
   const actor = useContext(ActorContext);
   return (
     <>
-      <Typography
-        variant="h1"
-        sx={{
-          mt: actor.profile_path ? theme.spacing(6) : 0,
-          mb: 0,
-        }}
-      >
+      <Typography variant="h1" sx={{ mb: 0 }}>
         {actor.name}
       </Typography>
 

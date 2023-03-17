@@ -7,8 +7,19 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import Typography, { TypographyProps } from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
-import { Breakpoint, Container } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import {
+  Breakpoint,
+  Container,
+  Table,
+  TableBody,
+  TableContainer,
+} from "@mui/material";
+
 import { useDefaultBackground, __pl } from "../app/helpers";
+import { MovieDetails } from "../app/types";
+import GridCard from "./movie/GridCard";
+import ListCard from "./movie/ListCard";
 
 interface SectionProps extends BoxProps {
   spacing?: "none" | "tiny" | "small" | "medium" | "large";
@@ -274,6 +285,54 @@ export const FullscreenLoader: React.FC = () => {
     </Box>
   );
 };
+
+export const MoviesList: React.FC<{
+  view?: "grid" | "list";
+  movies: MovieDetails[];
+}> = React.memo(({ view = "grid", movies }) =>
+  view === "grid" ? (
+    <Grid container spacing={2}>
+      {movies.map((movie, index) => {
+        return (
+          <Grid item key={`${index}-${movie.id}`} lg={2} md={3} sm={4} xs={6}>
+            <GridCard movie={movie} />
+          </Grid>
+        );
+      })}
+    </Grid>
+  ) : (
+    <TableContainer>
+      <Table
+        sx={{
+          borderRadius: 1,
+          background: (theme) => theme.palette.background.defaultAlt,
+        }}
+      >
+        <TableBody>
+          {movies.map((movie, index) => {
+            return <ListCard key={`${index}-${movie.id}`} movie={movie} />;
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
+);
+
+export const Poster: React.FC<{ image: string; title?: string }> = React.memo(
+  ({ image, title }) => {
+    return (
+      <Box textAlign="center" width="100%">
+        <Box
+          component="img"
+          src={image}
+          alt={title ? title : ""}
+          boxShadow={5}
+          sx={{ borderRadius: 1, maxWidth: "100%" }}
+        />
+      </Box>
+    );
+  }
+);
 
 export const LoadMore: React.FC<{
   nextLoad: number;

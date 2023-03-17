@@ -18,7 +18,7 @@ const NothingFound: React.FC = () => {
         variant="h4"
         sx={{ mb: (theme) => theme.spacing(4) }}
       >
-        Oops! That page can’t be found.
+        Oops! That page can't be found.
       </Typography>
       <Link to="/">
         <FancyButton size="large">Go back to home</FancyButton>

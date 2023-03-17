@@ -58,7 +58,7 @@ const ActorCard: React.FC<{ actor: ActorDetails }> = ({ actor }) => {
             <Typography>{actor.name}</Typography>
             {actor.character && (
               <Typography variant="body2" color="primary.fancy">
-                as{" "}
+                as&nbsp;
                 <Typography variant="inherit" component="span" fontWeight={600}>
                   {actor.character}
                 </Typography>
