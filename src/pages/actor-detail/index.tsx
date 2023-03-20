@@ -9,7 +9,7 @@ import {
   useGetActorDetailsQuery,
   useMovieQueryError,
 } from "../../app/store/moviesApiSlice";
-import { Section } from "../../features/components";
+import { Section, FullscreenLoader } from "../../features/components";
 import { ActorContext } from "../../app/context";
 import { useDocumentTitle } from "../../app/helpers";
 
@@ -20,6 +20,7 @@ const Actor: React.FC = React.memo(() => {
   const { id } = useParams<{ id: string }>();
   const {
     data: actor,
+    isFetching,
     isSuccess,
     isError,
     error,
@@ -34,6 +35,7 @@ const Actor: React.FC = React.memo(() => {
           <Typography>Actor loading failed.</Typography>
         </Section>
       )}
+      {isFetching && <FullscreenLoader />}
       {isSuccess && actor && (
         <ActorContext.Provider value={actor}>
           <Content />

@@ -1,11 +1,9 @@
 import React from "react";
 
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import { useTopRatedQuery } from "../../app/store/moviesApiSlice";
-import { SectionTitle } from "../../features/components";
-import DetailCard from "../../features/movie/DetailCard";
+import { MoviesList, SectionTitle } from "../../features/components";
 
 /**
  * Renders top rated movies
@@ -20,13 +18,7 @@ const TopRated: React.FC = React.memo(() => {
 
       {isSuccess &&
         (movies.length > 0 ? (
-          <Grid container spacing={2}>
-            {movies.map((movie, index) => (
-              <Grid item key={`${index}-${movie.id}`} lg={4} sm={6} xs={12}>
-                <DetailCard movie={movie} />
-              </Grid>
-            ))}
-          </Grid>
+          <MoviesList view="detail" movies={movies} />
         ) : (
           <Typography>Not found movies</Typography>
         ))}

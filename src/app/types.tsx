@@ -21,9 +21,6 @@ export interface MovieDetails {
     cast: ActorDetails[];
     crew: CrewDetails[];
   };
-  images: {
-    logos: any[];
-  };
 }
 
 export interface ActorDetails {

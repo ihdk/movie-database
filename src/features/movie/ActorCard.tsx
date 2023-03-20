@@ -13,9 +13,7 @@ import type { ActorDetails } from "../../app/types";
  */
 const ActorCard: React.FC<{ actor: ActorDetails }> = ({ actor }) => {
   const theme = useTheme();
-  const poster = actor.profile_path
-    ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
-    : "";
+
   return (
     <Fade in={true}>
       <Box
@@ -30,7 +28,7 @@ const ActorCard: React.FC<{ actor: ActorDetails }> = ({ actor }) => {
             component="img"
             height={350}
             width="100%"
-            src={poster}
+            src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
             alt={actor.name}
             sx={{
               display: "block",

@@ -1,4 +1,4 @@
-import React, { lazy, useCallback } from "react";
+import React, { lazy, Suspense, useCallback } from "react";
 import {
   createBrowserRouter,
   Outlet,
@@ -14,7 +14,6 @@ import { getRestorationKey } from "./helpers";
 import Header from "../pages/Header";
 import Footer from "../pages/Footer";
 
-/* Code splitting not used now due to single page routing */
 const Home = lazy(() => import("../pages/home"));
 const Movie = lazy(() => import("../pages/movie-detail"));
 const Actor = lazy(() => import("../pages/actor-detail"));
@@ -24,15 +23,17 @@ const NothingFound = lazy(() => import("../pages/nothing-found"));
 const RootRoute: React.FC = () => {
   const getKey = useCallback(getRestorationKey, []);
   return (
-    <PageWrapper>
-      <Header />
-      <ContentWrapper>
-        <Outlet />
-      </ContentWrapper>
-      <Footer />
-      <ScrollRestoration getKey={getKey} />
-      <ToastContainer autoClose={2000} theme="colored" />
-    </PageWrapper>
+    <Suspense fallback={<FullscreenLoader />}>
+      <PageWrapper>
+        <Header />
+        <ContentWrapper>
+          <Outlet />
+        </ContentWrapper>
+        <Footer />
+        <ScrollRestoration getKey={getKey} />
+        <ToastContainer autoClose={2000} theme="colored" />
+      </PageWrapper>
+    </Suspense>
   );
 };
 

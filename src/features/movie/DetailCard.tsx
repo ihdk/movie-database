@@ -19,12 +19,13 @@ import { FancyButton, ImageWithOverlay, MovieScore } from "../components";
 const DetailCard: React.FC<{ movie: MovieDetails }> = React.memo(
   ({ movie }) => {
     const theme = useTheme();
-    const poster = movie.poster_path
-      ? `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
-      : "";
+    const poster =
+      movie.poster_path &&
+      `https://image.tmdb.org/t/p/w200/${movie.poster_path}`;
     const backdrop = movie.backdrop_path
       ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
       : poster;
+
     return (
       <MovieContext.Provider value={movie}>
         <Box

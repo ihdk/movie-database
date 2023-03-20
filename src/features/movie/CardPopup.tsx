@@ -39,15 +39,14 @@ const CardPopup: React.FC<{
   const movie = useContext(MovieContext);
   const position = getPopupPosition(cardRef);
   const backdrop =
-    movie.backdrop_path || movie.poster_path
-      ? `https://image.tmdb.org/t/p/w500${
-          movie.backdrop_path ? movie.backdrop_path : movie.poster_path
-        }`
-      : "";
+    (movie.backdrop_path || movie.poster_path) &&
+    `https://image.tmdb.org/t/p/w500${
+      movie.backdrop_path ? movie.backdrop_path : movie.poster_path
+    }`;
 
   return (
     <Box
-      className={`card-popup ${opened ? "is-opened" : ""}`}
+      className="card-popup"
       sx={{
         width: "200%",
         position: "absolute",
@@ -63,7 +62,7 @@ const CardPopup: React.FC<{
         ...(position === "center" && { left: "-50%" }),
       }}
     >
-      <Zoom in={opened} timeout={200}>
+      <Zoom in={opened} timeout={200} mountOnEnter unmountOnExit>
         <Box
           borderRadius={1}
           sx={{

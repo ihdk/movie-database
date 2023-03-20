@@ -10,7 +10,7 @@ import {
   useGetMovieDetailsQuery,
   useMovieQueryError,
 } from "../../app/store/moviesApiSlice";
-import { Section } from "../../features/components";
+import { Section, FullscreenLoader } from "../../features/components";
 import { MovieContext } from "../../app/context";
 import { useDocumentTitle } from "../../app/helpers";
 
@@ -21,6 +21,7 @@ const Movie: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const {
     data: movie,
+    isFetching,
     isSuccess,
     isError,
     error,
@@ -35,11 +36,12 @@ const Movie: React.FC = () => {
           <Typography>Movie loading failed.</Typography>
         </Section>
       )}
+      {isFetching && <FullscreenLoader />}
       {isSuccess && movie && (
         <MovieContext.Provider value={movie}>
           {movie.backdrop_path && (
             <Cover
-              image={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              image={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
             />
           )}
           <Content />

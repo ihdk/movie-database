@@ -20,6 +20,7 @@ import { useDefaultBackground, __pl } from "../app/helpers";
 import { MovieDetails } from "../app/types";
 import GridCard from "./movie/GridCard";
 import ListCard from "./movie/ListCard";
+import DetailCard from "./movie/DetailCard";
 
 interface SectionProps extends BoxProps {
   spacing?: "none" | "tiny" | "small" | "medium" | "large";
@@ -275,48 +276,81 @@ export const FullscreenLoader: React.FC = () => {
   return (
     <Box
       sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
         height: "100vh",
+        width: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        color: "red",
+        background: (theme) => theme.palette.background.default,
+        zIndex: 999,
       }}
     >
-      <CircularProgress />
+      <CircularProgress color="secondary" />
     </Box>
   );
 };
 
 export const MoviesList: React.FC<{
-  view?: "grid" | "list";
   movies: MovieDetails[];
-}> = React.memo(({ view = "grid", movies }) =>
-  view === "grid" ? (
-    <Grid container spacing={2}>
-      {movies.map((movie, index) => {
-        return (
-          <Grid item key={`${index}-${movie.id}`} lg={2} md={3} sm={4} xs={6}>
-            <GridCard movie={movie} />
-          </Grid>
-        );
-      })}
-    </Grid>
-  ) : (
-    <TableContainer>
-      <Table
-        sx={{
-          borderRadius: 1,
-          background: (theme) => theme.palette.background.defaultAlt,
-        }}
-      >
-        <TableBody>
+  view?: "grid" | "list" | "detail";
+}> = React.memo(({ view = "grid", movies }) => {
+  switch (view) {
+    case "grid":
+      return (
+        <Grid container spacing={2}>
           {movies.map((movie, index) => {
-            return <ListCard key={`${index}-${movie.id}`} movie={movie} />;
+            return (
+              <Grid
+                item
+                key={`${index}-${movie.id}`}
+                lg={2}
+                md={3}
+                sm={4}
+                xs={6}
+              >
+                <GridCard movie={movie} />
+              </Grid>
+            );
           })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  )
-);
+        </Grid>
+      );
+
+    case "list":
+      return (
+        <TableContainer>
+          <Table
+            sx={{
+              borderRadius: 1,
+              background: (theme) => theme.palette.background.defaultAlt,
+            }}
+          >
+            <TableBody>
+              {movies.map((movie, index) => {
+                return <ListCard key={`${index}-${movie.id}`} movie={movie} />;
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
+
+    case "detail":
+      return (
+        <Grid container spacing={2}>
+          {movies.map((movie, index) => {
+            return (
+              <Grid item key={`${index}-${movie.id}`} lg={4} md={6} sm={12}>
+                <DetailCard movie={movie} />
+              </Grid>
+            );
+          })}
+        </Grid>
+      );
+  }
+});
 
 export const Poster: React.FC<{ image: string; title?: string }> = React.memo(
   ({ image, title }) => {
