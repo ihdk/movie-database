@@ -1,6 +1,8 @@
 import React from "react";
+import { ToastContainer, ToastContainerProps } from "react-toastify";
+import styled from "styled-components";
 
-import { styled, Switch, useTheme } from "@mui/material";
+import { styled as muiStyled, Switch, useTheme, Theme } from "@mui/material";
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import Box, { BoxProps } from "@mui/material/Box";
 import Button, { ButtonProps } from "@mui/material/Button";
@@ -119,7 +121,7 @@ export const ContentWrapper: React.FC<BoxProps> = ({ children, ...props }) => {
 };
 
 export const FancyLoadingButton = React.memo(
-  styled(LoadingButton)<LoadingButtonProps>(({ theme }) => ({
+  muiStyled(LoadingButton)<LoadingButtonProps>(({ theme }) => ({
     whiteSpace: "nowrap",
     color: "#ffffff",
     backgroundImage: theme.palette.background.fancyButton,
@@ -132,7 +134,7 @@ export const FancyLoadingButton = React.memo(
 );
 
 export const FancyButton = React.memo(
-  styled(Button)<ButtonProps>(({ theme }) => ({
+  muiStyled(Button)<ButtonProps>(({ theme }) => ({
     whiteSpace: "nowrap",
     color: "#ffffff",
     backgroundImage: theme.palette.background.fancyButton,
@@ -145,7 +147,7 @@ export const FancyButton = React.memo(
 );
 
 export const SectionTitle = React.memo(
-  styled(Typography)<TypographyProps>(({ theme }) => ({
+  muiStyled(Typography)<TypographyProps>(({ theme }) => ({
     paddingLeft: "1rem",
     position: "relative",
     ":before": {
@@ -387,7 +389,7 @@ export const LoadMore: React.FC<{
   ) : null;
 });
 
-export const StyledSwitcher = styled(Switch)(({ theme }) => {
+export const StyledSwitcher = muiStyled(Switch)(({ theme }) => {
   const space = 2;
   const height = 28;
   const width = height * 2;
@@ -467,3 +469,12 @@ export const StyledSwitcher = styled(Switch)(({ theme }) => {
     },
   };
 });
+
+interface ErrorNotificationProps extends ToastContainerProps {
+  muiTheme: Theme;
+}
+export const ErrorNotification = styled(ToastContainer)<ErrorNotificationProps>`
+  .Toastify__toast--error {
+    background: ${(props) => props.muiTheme.palette.background.fancy};
+  }
+`;

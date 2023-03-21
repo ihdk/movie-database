@@ -4,9 +4,11 @@ import {
   Outlet,
   ScrollRestoration,
 } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { useTheme } from "@mui/material/styles";
+
 import {
   ContentWrapper,
+  ErrorNotification,
   FullscreenLoader,
   PageWrapper,
 } from "../features/components";
@@ -22,6 +24,7 @@ const NothingFound = lazy(() => import("../pages/nothing-found"));
 
 const RootRoute: React.FC = () => {
   const getKey = useCallback(getRestorationKey, []);
+  const theme = useTheme();
   return (
     <Suspense fallback={<FullscreenLoader />}>
       <PageWrapper>
@@ -31,7 +34,7 @@ const RootRoute: React.FC = () => {
         </ContentWrapper>
         <Footer />
         <ScrollRestoration getKey={getKey} />
-        <ToastContainer autoClose={2000} theme="colored" />
+        <ErrorNotification autoClose={2000} muiTheme={theme} theme="colored" />
       </PageWrapper>
     </Suspense>
   );
