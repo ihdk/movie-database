@@ -1,7 +1,9 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { moviesApiSlice } from "./moviesApiSlice";
 import { MovieDetails, ThemeType, SearchResultsView } from "../types";
+import { notify } from "../helpers";
 
 export const initialState = {
   searchTerm: "",
@@ -34,6 +36,15 @@ const localSlice = createSlice({
       state,
       action: PayloadAction<{ movie: MovieDetails; add: boolean }>
     ) => {
+      notify({
+        title: action.payload.add
+          ? "Added to favourites"
+          : "Removed from favourites",
+        text: action.payload.movie.title,
+        options: {
+          icon: action.payload.add ? <CheckCircleIcon /> : <DeleteIcon />,
+        },
+      });
       state.favouriteMovies = action.payload.add
         ? [action.payload.movie, ...state.favouriteMovies]
         : state.favouriteMovies.filter(

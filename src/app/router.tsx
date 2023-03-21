@@ -34,7 +34,7 @@ const RootRoute: React.FC = () => {
         </ContentWrapper>
         <Footer />
         <ScrollRestoration getKey={getKey} />
-        <ErrorNotification autoClose={2000} muiTheme={theme} theme="colored" />
+        <ErrorNotification autoClose={2000} muiTheme={theme} />
       </PageWrapper>
     </Suspense>
   );

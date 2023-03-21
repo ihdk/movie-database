@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation, Location, useMatches } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast, ToastOptions } from "react-toastify";
 
 import Typography from "@mui/material/Typography";
 
@@ -22,24 +22,35 @@ export const __pl: (text: string[], count: number) => string = (
   return count === 1 ? text[0] : text[1];
 };
 
+interface NotifyOptions {
+  text: string;
+  title?: string;
+  options?: ToastOptions;
+}
 /**
  * Displays notification message
  *
  * @param message notification message text
  * @param title notification title text
  */
-export const notify = (message: string, title?: string) => {
-  toast.error(
+export const notify = ({ text, title, options }: NotifyOptions) => {
+  toast(
     <>
       {title && (
-        <Typography variant="body1" fontWeight={600} display="block">
+        <Typography
+          variant="body1"
+          fontWeight={400}
+          lineHeight={1.2}
+          display="block"
+        >
           {title}
         </Typography>
       )}
       <Typography variant="body2" display="block">
-        {message}
+        {text}
       </Typography>
-    </>
+    </>,
+    options
   );
 };
 

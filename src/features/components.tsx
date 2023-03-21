@@ -474,7 +474,20 @@ interface ErrorNotificationProps extends ToastContainerProps {
   muiTheme: Theme;
 }
 export const ErrorNotification = styled(ToastContainer)<ErrorNotificationProps>`
-  .Toastify__toast--error {
+  .Toastify__toast {
     background: ${(props) => props.muiTheme.palette.background.fancy};
+    .Toastify__toast-body {
+      color: #ffffff;
+      .Toastify__toast-icon svg {
+        fill: #ffffff;
+      }
+    }
+    .Toastify__close-button {
+      color: rgba(255, 255, 255, 1);
+      opacity: 0.6;
+    }
+    .Toastify__progress-bar {
+      background: rgba(255, 255, 255, 0.7);
+    }
   }
 `;

@@ -58,7 +58,8 @@ export const moviesApiSlice = createApi({
         }
       },
       transformResponse: (response: MoviesApiResponse) => {
-        if (response.results.length === 0) notify("Movie not found!");
+        if (response.results.length === 0)
+          notify({ text: "Movie not found!", options: { type: "error" } });
         return response;
       },
     }),
@@ -151,7 +152,7 @@ export const useMovieQueryError = (
 ) => {
   if (isError && error) {
     if ("data" in error) {
-      notify(error.data.status_message);
+      notify({ text: error.data.status_message, options: { type: "error" } });
     } else {
       const errMsg =
         "message" in error
@@ -159,7 +160,7 @@ export const useMovieQueryError = (
           : "error" in error
           ? error.error
           : JSON.stringify(error);
-      notify(errMsg as string);
+      notify({ text: errMsg as string, options: { type: "error" } });
     }
   }
 };
