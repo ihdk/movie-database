@@ -10,6 +10,7 @@ import { useDocumentTitle } from "../../app/helpers";
  */
 const NothingFound: React.FC = () => {
   useDocumentTitle("Page not found");
+
   return (
     <Section spacing="large">
       <Typography
