@@ -12,6 +12,7 @@ import { TmdbLogo } from "../features/icons";
  */
 const Footer: React.FC = () => {
   const theme = useTheme();
+
   return (
     <Section
       spacing="small"
