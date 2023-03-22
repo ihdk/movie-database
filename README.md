@@ -31,7 +31,7 @@ npm start
 
 ## Application details
 
-The application cosists of four routes splitted into separated chunks:
+Application cosists of four routes splitted into separated chunks:
 
 - Homepage with search functionality
 - Movie detail page
@@ -39,7 +39,7 @@ The application cosists of four routes splitted into separated chunks:
 - Favourite movies page
 - 404 page
 
-Last search results, favourite movies or choosen theme are stored in local storage thanks to [Redux Persist](https://www.npmjs.com/package/redux-persist).
+Information as last search results, favourite movies or selected theme are stored in local storage thanks to [Redux Persist](https://www.npmjs.com/package/redux-persist).
 
 ## Basic components tests
 
