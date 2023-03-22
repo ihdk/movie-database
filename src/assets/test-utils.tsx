@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import type { PreloadedState } from "@reduxjs/toolkit";
 
 import { setupStore } from "../app/store/store";
-import mockData from "./test-mock-data";
+import testMockData from "./test-mock-data";
 import type { AppStoreType, RootReducerType } from "../app/store/store";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
@@ -59,6 +59,6 @@ export const renderHookWithProvider = <Props, Result>(
 
 export const getMockData = (count = 10) => {
   const returnResults =
-    count > mockData.length ? mockData.length : count <= 0 ? 1 : count;
-  return mockData.slice(0, returnResults);
+    count > testMockData.length ? testMockData.length : count <= 0 ? 1 : count;
+  return testMockData.slice(0, returnResults);
 };

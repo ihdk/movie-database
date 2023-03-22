@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { screen } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { ToastContainer } from "react-toastify";
 import { notify, useIsFavouriteMovie, __pl } from "../app/helpers";
+import { ToastContainer } from "react-toastify";
 import {
   getMockData,
   renderHookWithProvider,
@@ -30,7 +30,7 @@ describe("notify", () => {
       renderWithProvider(<ToastContainer />);
     });
 
-    notify(message, title);
+    notify({ text: message, title: title });
 
     act(() => {
       jest.advanceTimersByTime(500);
